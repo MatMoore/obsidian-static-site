@@ -11,14 +11,7 @@
  <!-- TODO add a header for top level navigation -->
  <div class="optional-sidebar-layout optional-sidebar-layout-full-height">
   <nav>
-    <ul class="navigation-list">
-      <% navigation.each do |nav_section| %>
-      <h1><%= nav_section.title %></h1>
-      <% nav_section.entries.each do |nav_entry| %>
-      <li><a href="<%= nav_entry.href %>"><%= nav_entry.link_text %></a></li>
-      <% end %>
-      <% end %>
-    </ul><br>
+    <%= render_nav(navigation) %>
   </nav>
   <article>
     <h1><%= title %></h1>

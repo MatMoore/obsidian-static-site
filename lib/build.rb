@@ -1,10 +1,12 @@
-require 'erb'
+require 'tilt/erb'
 require 'cgi'
 require_relative 'navigation'
+require_relative 'helpers'
 
 class Build
-  def initialize(output_dir)
+  def initialize(output_dir, parser)
     @output_dir = output_dir
+    @parser = parser
   end
 
   def mkpath
@@ -12,13 +14,14 @@ class Build
   end
 
   def generate_example
-    template = File.read("templates/page.html.erb")
+    template = Tilt::ERBTemplate.new('templates/page.html.erb')
 
-    output = ERB.new(template).result_with_hash(
+    output = template.render(
+      Helpers.new,
       title: CGI.escape_html("Stuff & things"),
       meta_description: CGI.escape_html("In which we define \"stuff\" and \"things\""),
       content: "<p>Hello world</p>",
-      navigation: generate_example_nav
+      navigation: parser.index.directories.filter {|d| ['Concepts', 'Technologies'].include?(d.title) },
     )
 
     file_path = output_dir + 'page.html'
@@ -27,22 +30,13 @@ class Build
     end
   end
 
-  def generate_example_nav
-    [
-      Navigation::Section.new(
-        title: 'Stuff',
-        entries: [
-          Navigation::Entry.new('', 'Cat')
-        ]
-      ),
-      Navigation::Section.new(
-        title: 'Things',
-        entries: [
-          Navigation::Entry.new('', 'Apple'),
-          Navigation::Entry.new('', 'Banana'),
-        ]
-      )
-    ]
+  def map_index(index)
+    Navigation::Section.new(
+      title: index.title,
+      entries:
+        #index.directories.map { |d| map_index(d) } +
+        index.notes.map { |e| Navigation::Entry.new(e.slug, e.title) }
+    )
   end
 
   def copy_assets
@@ -53,4 +47,5 @@ class Build
   end
 
   attr_reader :output_dir
+  attr_reader :parser
 end

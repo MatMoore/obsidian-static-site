@@ -71,15 +71,37 @@ Usage:
 
 .navigation-list {
   list-style-type: none;
+  font-size: var(--font-size-medium);
   margin: 0;
   padding: 0;
 }
 
-.navigation-list a {
+.navigation-list {
+  margin-left: var(--fixed-spacing-small);
+  margin-bottom: var(--fixed-spacing-small);
+}
+
+nav a {
   color: var(--theme-background);
 }
 
-.navigation-list h1 {
+nav h1 {
   font-size: var(--font-size-quite-big);
   margin-bottom: 0;
+  margin-top: 0.5lh;
 }
+
+nav h1:first-child {
+  margin-top: 0;
+}
+
+nav h2, h3, h4, h5 {
+  font-size: var(--font-size-medium);
+  margin-bottom: 0;
+  margin-top: 0.5lh;
+}
+
+nav h2:first-child,h3:first-child,h4:first-child,h5:first-child {
+  margin-top: 0;
+}
+
