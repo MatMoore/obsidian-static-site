@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='en'>
+ <head>
+  <title><%= title %></title>
+  <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="<%= meta_description %>">
+  <link rel="stylesheet" type="text/css" href="site.css">
+ </head>
+ <body>
+ <!-- TODO add a header for top level navigation -->
+ <div class="optional-sidebar-layout optional-sidebar-layout-full-height">
+  <nav>
+    <ul class="navigation-list">
+      <% navigation.each do |nav_section| %>
+      <h1><%= nav_section.title %></h1>
+      <% nav_section.entries.each do |nav_entry| %>
+      <li><a href="<%= nav_entry.href %>"><%= nav_entry.link_text %></a></li>
+      <% end %>
+      <% end %>
+    </ul><br>
+  </nav>
+  <article>
+    <h1><%= title %></h1>
+    <%= content %>
+  </article>
+ </div>
+ </body>
+</html>
