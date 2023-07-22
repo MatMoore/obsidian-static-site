@@ -7,8 +7,16 @@
   <meta name="description" content="<%= meta_description %>">
   <link rel="stylesheet" type="text/css" href="site.css">
  </head>
- <body>
- <!-- TODO add a header for top level navigation -->
+ <body class="full-height-with-header">
+ <header>
+  <nav>
+    <ul class="horizontal-list">
+      <% top_level_nav.each_with_index do |section, i| %>
+      <li <%= i == 0? "class=\"selected\"" : "" %>><%= link_tag(section.slug, section.title) %></li>
+      <% end %>
+    </ul>
+  </nav>
+ </header>
  <div class="optional-sidebar-layout optional-sidebar-layout-full-height">
   <nav>
     <%= render_nav(navigation) %>

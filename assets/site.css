@@ -1,6 +1,8 @@
 html {
-  --theme-foreground: #210423;
+  --theme-primary: #210423;
+  --theme-highlight: #3b0c52;
   --theme-background: #b2b8c0;
+  --theme-black: #101010;
 
   --font-size-very-small: 0.75rem;  /* 12px */
   --font-size-quite-small: 0.75rem; /* 14px */
@@ -14,6 +16,7 @@ html {
 
   --fixed-spacing-small: 8px;
 
+  --text-padding-very-small: 0.5ch;
   --text-padding-small: 0.5lh 1ch;
   --text-padding-medium: 0.5lh 1.5ch;
 
@@ -21,13 +24,15 @@ html {
 }
 
 body {
-  color: var(--theme-foreground);
+  color: var(--theme-primary);
   background-color: var(--theme-background);
   font-size: var(--font-size-medium);
   line-height: 1.5;
   padding: 0;
   margin: 0;
 }
+
+html { height: 100%;}
 
 h1 {
   font-size: var(--font-size-very-big);
@@ -51,18 +56,24 @@ Usage:
   flex-wrap: wrap-reverse;
 }
 
-.optional-sidebar-layout-full-height {
-  min-height: 100dvh;
-}
-
-.optional-sidebar-layout nav {
-  flex: 1 25ch;
+header {
+  background-color: var(--theme-black);
   color: var(--theme-background);
-  background-color: var(--theme-foreground);
   padding: var(--text-padding-small);
 }
 
-.optional-sidebar-layout article {
+header nav a {
+  color: var(--theme-background);
+}
+
+.optional-sidebar-layout > nav {
+  flex: 1 25ch;
+  color: var(--theme-background);
+  background-color: var(--theme-primary);
+  padding: var(--text-padding-small);
+}
+
+.optional-sidebar-layout > article {
   flex: 3 80ch;
   padding: var(--text-padding-medium);
   max-inline-size: var(--max-line-width);
@@ -79,6 +90,32 @@ Usage:
 .navigation-list {
   margin-left: var(--fixed-spacing-small);
   margin-bottom: var(--fixed-spacing-small);
+}
+
+.horizontal-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 3ch;
+  flex-wrap: wrap;
+}
+
+.horizontal-list li {
+  display: block;
+  background-color: var(--theme-primary);
+  flex-shrink: 1;
+  padding: var(--text-padding-very-small);
+}
+
+.horizontal-list li.selected {
+  background-color: var(--theme-highlight);
+}
+
+.horizontal-list li.selected a {
+  text-decoration: none;
 }
 
 nav a {
@@ -101,7 +138,16 @@ nav h2, h3, h4, h5 {
   margin-top: 0.5lh;
 }
 
-nav h2:first-child,h3:first-child,h4:first-child,h5:first-child {
+nav h2:first-child, h3:first-child, h4:first-child, h5:first-child {
   margin-top: 0;
 }
 
+.full-height-with-header {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.full-height-with-header .optional-sidebar-layout {
+  flex-grow: 1;
+}

@@ -21,7 +21,8 @@ class Build
       title: CGI.escape_html("Stuff & things"),
       meta_description: CGI.escape_html("In which we define \"stuff\" and \"things\""),
       content: "<p>Hello world</p>",
-      navigation: parser.index.directories.filter {|d| ['Concepts', 'Technologies'].include?(d.title) },
+      top_level_nav: parser.index.directories.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
+      navigation: parser.index.directories.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
     )
 
     file_path = output_dir + 'page.html'
