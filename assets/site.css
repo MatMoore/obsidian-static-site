@@ -110,6 +110,22 @@ header nav a {
   padding: var(--text-padding-very-small);
 }
 
+.skip-link {
+  position: absolute;
+  z-index: 999;
+  left: -9999px;
+  opacity: 0;
+  padding: 1rem;
+  background-color: var(--theme-primary);
+  color: var(--theme-background);
+}
+
+.skip-link:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+}
+
 .horizontal-list li.selected {
   background-color: var(--theme-highlight);
 }
