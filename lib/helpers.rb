@@ -6,8 +6,6 @@ class Helpers
   end
 
   def render_nav(navigation, level: 1)
-    #@nav_template = Tilt::ERBTemplate.new("templates/nav_section.html.erb")
-    puts "!!! render nav #{navigation.map(&:title)}"
     @nav_template.render(self, navigation: navigation, level: level)
   end
 
@@ -21,6 +19,16 @@ class Helpers
     content = (yield)
 
     "<h#{level}>#{content}</h#{level}>"
+  end
+
+  def link_note(note)
+    if note.is_a?(Obsidian::Index)
+      href = "/#{note.slug}/"
+    else
+      href = "/#{note.slug}.html"
+    end
+
+    link_tag(href, note.title)
   end
 
   def link_tag(href, link_text)

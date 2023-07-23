@@ -7,7 +7,7 @@ module Server
     t = Thread.new { server.start }
     trap("INT") { server.shutdown }
 
-    url = "http://localhost:#{server.config[:Port]}/page.html"
+    url = "http://localhost:#{server.config[:Port]}/"
     launch_browser(url)
 
     t.join

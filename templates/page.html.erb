@@ -5,7 +5,7 @@
   <meta charset='utf-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="<%= meta_description %>">
-  <link rel="stylesheet" type="text/css" href="site.css">
+  <link rel="stylesheet" type="text/css" href="/site.css">
  </head>
  <body class="full-height-with-header">
  <header>
@@ -13,7 +13,7 @@
   <nav>
     <ul class="horizontal-list">
       <% top_level_nav.each_with_index do |section, i| %>
-      <li <%= i == 0? "class=\"selected\"" : "" %>><%= link_tag(section.slug, section.title) %></li>
+      <li <%= i == 0? "class=\"selected\"" : "" %>><%= link_note(section) %></li>
       <% end %>
     </ul>
   </nav>

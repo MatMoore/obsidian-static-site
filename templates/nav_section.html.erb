@@ -1,12 +1,12 @@
 <% unless navigation.empty? %>
 <% navigation.each do |index| %>
-  <%= header_tag(level) { link_tag(index.slug, index.title) } %>
+  <%= header_tag(level) { link_note(index) } %>
   <ul class="navigation-list">
     <% unless index.directories.empty? %>
     <li><%= render_nav(index.directories, level: level + 1) %></li>
     <% end %>
     <% index.notes.each do |nav_entry| %>
-      <li><a href="<%= nav_entry.slug %>"><%= nav_entry.title %></a></li>
+      <li><%= link_note(nav_entry) %></li>
     <% end %>
   </ul>
 <% end %>
