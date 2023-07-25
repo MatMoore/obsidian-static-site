@@ -24,7 +24,7 @@ class Build
         helpers,
         title: CGI.escape_html(note.title),
         meta_description: CGI.escape_html(note.title),
-        content: "<p>Hello #{note.title}</p>",
+        content: note.content&.generate_html,
         top_level_nav: filtered_nav,
         navigation: filtered_nav,
       )
