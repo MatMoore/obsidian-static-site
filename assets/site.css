@@ -4,15 +4,6 @@ html {
   --theme-background: #b2b8c0;
   --theme-black: #101010;
 
-  /*
-    these spacings can be added to the corresponding font sizes to
-    pad the vertical space up to the next highest size
-  */
-  --vertical-spacing-very-small: 0.125rem;
-  --vertical-spacing-small: 0.25rem;
-  --vertical-spacing-medium: 0.5rem;
-  --vertical-spacing-big: 1rem;
-
   --font-size-very-small: 0.75rem;   /* 12px */
   --font-size-quite-small: 0.875rem; /* 14px */
   --font-size-small: 1rem;           /* 16px */
@@ -24,16 +15,15 @@ html {
   --font-size-very-very-big: 3rem;   /* 48px */
   --font-size-giant: 3.75rem;        /* 60px */
 
-  --vertical-space-2: calc(var(--font-size-medium) * 1.5 * 2);
-  --vertical-space-3: calc(var(--font-size-medium) * 1.5 * 3);
-  --vertical-space-4: calc(var(--font-size-medium) * 1.5 * 4);
+  --standard-line-height: 1.5;
 
   /*
-    These spacings preserve vertical rhythm when mixing paragraphs and headings
-    We want to avoid the headers pushing paragraph lines off the vertical grid
-    where the base unit is the paragraph line height: 1.5*1.25rem = 1.875rem
-    For the heading height to be equivalent to 2 lines we need total height of 3.75rem
+    Vertical spacings that are aligned with the quite big font's line height
   */
+  --vertical-space-1: calc(var(--font-size-quite-big) * var(--standard-line-height) * 1);
+  --vertical-space-2: calc(var(--font-size-quite-big) * var(--standard-line-height) * 2);
+  --vertical-space-3: calc(var(--font-size-quite-big) * var(--standard-line-height) * 3);
+  --vertical-space-4: calc(var(--font-size-quite-big) * var(--standard-line-height) * 4);
 
   --fixed-spacing-small: 8px;
 
@@ -48,25 +38,26 @@ body {
   color: var(--theme-primary);
   background-color: var(--theme-background);
   font-size: var(--font-size-medium);
-  line-height: 1.5; /* 30px */
+  line-height: var(--standard-line-height); /* 30px */
   padding: 0;
   margin: 0;
+}
+
+/*
+  Default margin between paragraphs and block elements
+*/
+article * {
+  margin-top: 0;
+  margin-bottom: 1lh;
 }
 
 html { height: 100%;}
 
 p {
-  margin-top: calc(var(--font-size-medium) * 0.5);
-  margin-bottom: calc(var(--font-size-medium) * 1.5);
-
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
-/*
-  H1 has a big margin either side, so remove margins
-  from the following element.
-*/
 h1 {
   font-size: var(--font-size-very-very-big);
   font-weight: bold;
@@ -74,48 +65,31 @@ h1 {
   margin-bottom: calc((var(--vertical-space-4) - var(--font-size-very-very-big)) / 2);
 }
 
-h1 + * {
-  margin-top: 0;
+h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin-top: calc(2 * (var(--vertical-space-3) - 1lh) / 3);
+  margin-bottom: calc((var(--vertical-space-3) - 1lh) / 3);
 }
 
-/*
-  Other headings just have top margins.
-  They all take up 2 lines of text.
-*/
 h2 {
   font-size: var(--font-size-very-big);
-  font-weight: bold;
-  margin-bottom: 0;
-  margin-top: calc(var(--vertical-space-2) - var(--font-size-very-big));
-  margin-bottom: 0;
 }
 
 h3 {
   font-size: var(--font-size-big);
-  font-weight: bold;
-  margin-top: calc(var(--vertical-space-2) - var(--font-size-big));
-  margin-bottom: 0;
 }
 
 h4 {
   font-size: var(--font-size-quite-big);
-  margin-top: calc(var(--vertical-space-2) - var(--font-size-quite-big));
-  margin-bottom: 0;
-  font-weight: bold;
-
 }
 
 h5 {
   font-size: var(--font-size-medium);
-  margin-top: calc(var(--vertical-space-2) - var(--font-size-medium));
-  margin-bottom: 0;
   font-weight: 900;
 }
 
 h6 {
   font-size: var(--font-size-smallish);
-  margin-top: calc(var(--vertical-space-2) - var(--font-size-smallish));
-  margin-bottom: 0;
   font-weight: 900;
 }
 
