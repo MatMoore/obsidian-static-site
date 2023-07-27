@@ -17,16 +17,24 @@ class Build
   def generate_site
     template = Tilt::ERBTemplate.new('templates/page.html.erb')
     helpers = Helpers.new
-    filtered_nav = parser.index.directories.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
+    sections = parser.index.directories.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
 
     parser.notes.each do |note|
+      navigation = if note.slug == "" || note.slug == "index"
+        sections
+      elsif note.is_a?(Obsidian::Index)
+        [note]
+      else
+        [note.parent]
+      end
+
       output = template.render(
         helpers,
         title: CGI.escape_html(note.title),
         meta_description: CGI.escape_html(note.title),
         content: note.content&.generate_html,
-        top_level_nav: filtered_nav,
-        navigation: filtered_nav,
+        top_level_nav: sections,
+        navigation: navigation,
       )
 
       file_path = output_dir + note.slug
