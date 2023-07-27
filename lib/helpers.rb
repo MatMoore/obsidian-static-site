@@ -5,8 +5,8 @@ class Helpers
     @nav_template = Tilt::ERBTemplate.new("templates/nav_section.html.erb")
   end
 
-  def render_nav(navigation, level: 1)
-    @nav_template.render(self, navigation: navigation, level: level)
+  def render_nav(navigation, level: 1, max_level: 3)
+    @nav_template.render(self, navigation: navigation, level: level, max_level: max_level)
   end
 
   def header_tag(level)
