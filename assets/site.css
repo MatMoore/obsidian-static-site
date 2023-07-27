@@ -1,6 +1,5 @@
 html {
   --theme-primary: #210423;
-  --theme-highlight: #3b0c52;
   --theme-background: #b2b8c0;
   --theme-black: #101010;
   --theme-link: #0001b5;
@@ -188,10 +187,6 @@ header nav a {
   left: 50%;
   transform: translateX(-50%);
   opacity: 1;
-}
-
-.horizontal-list li.selected {
-  background-color: var(--theme-highlight);
 }
 
 .horizontal-list li.selected a {
