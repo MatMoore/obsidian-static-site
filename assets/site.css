@@ -3,6 +3,7 @@ html {
   --theme-highlight: #3b0c52;
   --theme-background: #b2b8c0;
   --theme-black: #101010;
+  --theme-link: #0001b5;
 
   --font-size-very-small: 0.75rem;   /* 12px */
   --font-size-quite-small: 0.875rem; /* 14px */
@@ -49,6 +50,15 @@ body {
 article * {
   margin-top: 0;
   margin-bottom: 1lh;
+}
+
+article a {
+  color: var(--theme-link);
+}
+
+article li {
+  margin-top: 0;
+  margin-bottom: 0.5lh;
 }
 
 html { height: 100%;}
