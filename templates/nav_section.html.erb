@@ -1,15 +1,16 @@
 <% unless navigation.empty? %>
-  <% navigation.each do |index| %>
+  <% navigation.each do |page| %>
     <% if level == max_level %>
-    <li><%= link_note(index) %></li>
+    <li><%= link_page(page) %></li>
     <% else %>
-    <%= header_tag(level) { link_note(index) } %>
+    <%= header_tag(level) { link_page(page) } %>
     <ul class="navigation-list">
-      <% unless index.directories.empty? %>
-      <li><%= render_nav(index.directories, level: level + 1, max_level: max_level) %></li>
+      <% if page.is_index? %>
+      <% page.children.each do |nav_entry| %>
+      <li><%= link_page(nav_entry) %></li>
       <% end %>
-      <% index.notes.each do |nav_entry| %>
-        <li><%= link_note(nav_entry) %></li>
+      <% else %>
+      <li><%= render_nav(page.children, level: level + 1, max_level: max_level) %></li>
       <% end %>
     </ul>
     <% end %>

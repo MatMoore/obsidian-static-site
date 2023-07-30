@@ -21,14 +21,14 @@ class Helpers
     "<h#{level}>#{content}</h#{level}>"
   end
 
-  def link_note(note)
-    if note.is_a?(Obsidian::Index)
-      href = "/#{note.slug}/"
+  def link_page(page)
+    if page.is_index?
+      href = "/#{page.slug}/"
     else
-      href = "/#{note.slug}.html"
+      href = "/#{page.slug}.html"
     end
 
-    link_tag(href, note.title)
+    link_tag(href, page.title)
   end
 
   def link_tag(href, link_text)

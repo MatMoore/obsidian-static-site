@@ -13,7 +13,7 @@
   <nav>
     <ul class="horizontal-list">
       <% top_level_nav.each_with_index do |section, i| %>
-      <li <%= i == 0? "class=\"selected\"" : "" %>><%= link_note(section) %></li>
+      <li <%= i == 0? "class=\"selected\"" : "" %>><%= link_page(section) %></li>
       <% end %>
     </ul>
   </nav>

@@ -1,6 +1,5 @@
 require 'tilt/erb'
 require 'cgi'
-require_relative 'navigation'
 require_relative 'helpers'
 
 class Build
@@ -17,33 +16,35 @@ class Build
   def generate_site
     template = Tilt::ERBTemplate.new('templates/page.html.erb')
     helpers = Helpers.new
-    sections = parser.index.directories.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
+    sections = parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
 
-    parser.notes.each do |note|
-      navigation = if note.slug == "" || note.slug == "index"
+    parser.pages.each do |page|
+      navigation = if page.slug == "" || page.slug == "index"
         sections
-      elsif note.is_a?(Obsidian::Index)
-        [note]
+      elsif page.is_index?
+        [page]
       else
-        [note.parent]
+        [page.parent]
       end
+
+      title = page.title == "" ? "Knowledge base" : page.title
 
       output = template.render(
         helpers,
-        title: CGI.escape_html(note.title),
-        meta_description: CGI.escape_html(note.title),
-        content: note.content&.generate_html,
+        title: CGI.escape_html(title),
+        meta_description: CGI.escape_html(title),
+        content: page.content&.generate_html,
         top_level_nav: sections,
         navigation: navigation,
       )
 
-      file_path = output_dir + note.slug
+      file_path = output_dir + page.slug
 
       # This URL structure maps directly to the vault structure.
       # However, we could also consider putting each note into its own directory
       # This would give us simple, extensionless URLs, and converting a note into a directory
       # of notes won't break URLs.
-      html_path = if note.is_a?(Obsidian::Index)
+      html_path = if page.is_index?
         file_path + "index.html"
       else
         file_path.dirname + "#{file_path.basename}.html"
@@ -65,23 +66,14 @@ class Build
       title: CGI.escape_html("Stuff & things"),
       meta_description: CGI.escape_html("In which we define \"stuff\" and \"things\""),
       content: "<p>Hello world</p>",
-      top_level_nav: parser.index.directories.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
-      navigation: parser.index.directories.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
+      top_level_nav: parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
+      navigation: parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
     )
 
     file_path = output_dir + 'page.html'
     File.open(file_path, 'w') do |f|
       f.write(output)
     end
-  end
-
-  def map_index(index)
-    Navigation::Section.new(
-      title: index.title,
-      entries:
-        #index.directories.map { |d| map_index(d) } +
-        index.notes.map { |e| Navigation::Entry.new(e.slug, e.title) }
-    )
   end
 
   def copy_assets

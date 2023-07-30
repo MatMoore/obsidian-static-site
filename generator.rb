@@ -10,7 +10,7 @@ output_dir = Pathname.new('output')
 parser = Obsidian::Parser.new(Pathname.new('/Users/mat/tech-notes'))
 build = Build.new(output_dir, parser)
 
-page_count = parser.notes.count
+page_count = parser.pages.count
 puts "Generating #{page_count} pages"
 
 build.clean
