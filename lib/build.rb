@@ -40,14 +40,15 @@ class Build
 
       file_path = output_dir + page.slug
 
-      # This URL structure maps directly to the vault structure.
-      # However, we could also consider putting each note into its own directory
-      # This would give us simple, extensionless URLs, and converting a note into a directory
-      # of notes won't break URLs.
+      # Map every page to a directory with an index, regardless of whether
+      # it has any children. This enables child pages to be added in the
+      # future without changing the parent URL.
+      # I.e. rather than foo/bar.html evolving into foo/bar and foo/bar/*
+      # we have foo/bar evolving into foo/bar and foo/bar/*
       html_path = if page.is_index?
         file_path + "index.html"
       else
-        file_path.dirname + "#{file_path.basename}.html"
+        file_path.dirname + file_path.basename + "index.html"
       end
 
       html_path.dirname.mkpath

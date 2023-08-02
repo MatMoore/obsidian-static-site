@@ -22,11 +22,7 @@ class Helpers
   end
 
   def link_page(page)
-    if page.is_index?
-      href = "/#{page.slug}/"
-    else
-      href = "/#{page.slug}.html"
-    end
+    href = "/#{page.slug}/"
 
     link_tag(href, page.title)
   end
