@@ -34,12 +34,12 @@ html {
   --standard-line-height: 1.5;
 
   /*
-    Vertical spacings that are aligned with the quite big font's line height
+    Vertical spacings that are aligned with the medium font's line height
   */
-  --vertical-space-1: calc(var(--font-size-quite-big) * var(--standard-line-height) * 1);
-  --vertical-space-2: calc(var(--font-size-quite-big) * var(--standard-line-height) * 2);
-  --vertical-space-3: calc(var(--font-size-quite-big) * var(--standard-line-height) * 3);
-  --vertical-space-4: calc(var(--font-size-quite-big) * var(--standard-line-height) * 4);
+  --vertical-space-1: calc(var(--font-size-medium) * var(--standard-line-height) * 1);
+  --vertical-space-2: calc(var(--font-size-medium) * var(--standard-line-height) * 2);
+  --vertical-space-3: calc(var(--font-size-medium) * var(--standard-line-height) * 3);
+  --vertical-space-4: calc(var(--font-size-medium) * var(--standard-line-height) * 4);
 
   --fixed-spacing-small: 8px;
 
@@ -85,10 +85,10 @@ p {
 }
 
 h1 {
-  font-size: var(--font-size-very-very-big);
+  font-size: var(--font-size-very-big);
   font-weight: bold;
-  margin-top: calc((var(--vertical-space-4) - var(--font-size-very-very-big)) / 2);
-  margin-bottom: calc((var(--vertical-space-4) - var(--font-size-very-very-big)) / 2);
+  margin-top: calc((var(--vertical-space-4) - var(--font-size-very-big)) / 2);
+  margin-bottom: calc((var(--vertical-space-4) - var(--font-size-very-big)) / 2);
 }
 
 h2, h3, h4, h5, h6 {
@@ -98,25 +98,27 @@ h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  font-size: var(--font-size-very-big);
-}
-
-h3 {
   font-size: var(--font-size-big);
 }
 
-h4 {
+h3 {
   font-size: var(--font-size-quite-big);
 }
 
-h5 {
+h4 {
   font-size: var(--font-size-medium);
   font-weight: 900;
 }
 
+h5 {
+  font-size: var(--font-size-medium);
+  font-variant: small-caps;
+}
+
 h6 {
-  font-size: var(--font-size-smallish);
+  font-size: var(--font-size-medium);
   font-weight: 900;
+  font-variant: small-caps;
 }
 
 /*
@@ -134,6 +136,7 @@ Usage:
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
+  background-color: var(--theme-primary);
 }
 
 header {
@@ -147,7 +150,7 @@ header nav a {
 }
 
 .optional-sidebar-layout > nav {
-  flex: 1 25ch;
+  flex: 0 25ch;
   color: var(--theme-background);
   background-color: var(--theme-primary);
   padding: var(--text-padding-small);
@@ -157,12 +160,14 @@ header nav a {
   flex: 3 50ch;
   padding: var(--text-padding-medium);
   max-inline-size: var(--max-line-width);
-  font-size: var(--font-size-quite-big);
+  font-size: var(--font-size-medium);
+  color: var(--theme-primary);
+  background-color: var(--theme-background);
 }
 
 .navigation-list {
   list-style-type: none;
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-smallish);
   margin: 0;
   padding: 0;
 }
@@ -215,7 +220,7 @@ nav a {
 }
 
 nav h1 {
-  font-size: var(--font-size-quite-big);
+  font-size: var(--font-size-medium);
   margin-bottom: 0;
   margin-top: 0.5lh;
 }
@@ -225,7 +230,7 @@ nav h1:first-child {
 }
 
 nav h2, nav h3, nav h4, nav h5 {
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-smallish);
   margin-bottom: 0;
   margin-top: 0.5lh;
 }
