@@ -78,10 +78,7 @@ class Build
   end
 
   def copy_assets
-    assets_dir = Pathname.new('assets')
-    assets_dir.glob('*') do |asset|
-      FileUtils.cp(asset, output_dir)
-    end
+    FileUtils.cp_r('assets', output_dir + 'assets')
   end
 
   attr_reader :output_dir

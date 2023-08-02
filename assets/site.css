@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Literata";
+  src:
+    local("Literata"),
+    url("./Literata/Literata%5Bopsz%2Cwght%5D.woff2") format("opentype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Literata";
+  src:
+    local("Literata"),
+    url("./Literata/Literata%5Bopsz%2Cwght%5D.woff2") format("opentype");
+  font-style: italic;
+}
+
 html {
   --theme-primary: #210423;
   --theme-background: #b2b8c0;
@@ -31,13 +47,14 @@ html {
   --text-padding-small: 0.5lh 1ch;
   --text-padding-medium: 0.5lh 1.5ch;
 
-  --max-line-width: 100ch;
+  --max-line-width: 70ch;
 }
 
 body {
   color: var(--theme-primary);
   background-color: var(--theme-background);
   font-size: var(--font-size-medium);
+  font-family: 'Literata', serif;
   line-height: var(--standard-line-height); /* 30px */
   padding: 0;
   margin: 0;
@@ -137,7 +154,7 @@ header nav a {
 }
 
 .optional-sidebar-layout > article {
-  flex: 3 80ch;
+  flex: 3 50ch;
   padding: var(--text-padding-medium);
   max-inline-size: var(--max-line-width);
   font-size: var(--font-size-quite-big);
