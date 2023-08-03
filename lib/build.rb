@@ -18,43 +18,46 @@ class Build
     helpers = Helpers.new
     sections = parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
 
-    parser.pages.each do |page|
-      navigation = if page.slug == "" || page.slug == "index"
-        sections
-      elsif page.is_index?
-        [page]
-      else
-        [page.parent]
-      end
+    pages_to_generate = [parser.index] + sections
+    pages_to_generate.each do |p|
+      p.walk_tree do |page|
+        navigation = if page.slug == "" || page.slug == "index"
+          sections
+        elsif page.is_index?
+          [page]
+        else
+          [page.parent]
+        end
 
-      title = page.title == "" ? "Knowledge base" : page.title
+        title = page.title == "" ? "Knowledge base" : page.title
 
-      output = template.render(
-        helpers,
-        title: CGI.escape_html(title),
-        meta_description: CGI.escape_html(title),
-        content: page.content&.generate_html,
-        top_level_nav: sections,
-        navigation: navigation,
-      )
+        output = template.render(
+          helpers,
+          title: CGI.escape_html(title),
+          meta_description: CGI.escape_html(title),
+          content: page.content&.generate_html,
+          top_level_nav: sections,
+          navigation: navigation,
+        )
 
-      file_path = output_dir + page.slug
+        file_path = output_dir + page.slug
 
-      # Map every page to a directory with an index, regardless of whether
-      # it has any children. This enables child pages to be added in the
-      # future without changing the parent URL.
-      # I.e. rather than foo/bar.html evolving into foo/bar and foo/bar/*
-      # we have foo/bar evolving into foo/bar and foo/bar/*
-      html_path = if page.is_index?
-        file_path + "index.html"
-      else
-        file_path.dirname + file_path.basename + "index.html"
-      end
+        # Map every page to a directory with an index, regardless of whether
+        # it has any children. This enables child pages to be added in the
+        # future without changing the parent URL.
+        # I.e. rather than foo/bar.html evolving into foo/bar and foo/bar/*
+        # we have foo/bar evolving into foo/bar and foo/bar/*
+        html_path = if page.is_index?
+          file_path + "index.html"
+        else
+          file_path.dirname + file_path.basename + "index.html"
+        end
 
-      html_path.dirname.mkpath
+        html_path.dirname.mkpath
 
-      File.open(html_path, 'w') do |f|
-        f.write(output)
+        File.open(html_path, 'w') do |f|
+          f.write(output)
+        end
       end
     end
   end
