@@ -165,13 +165,13 @@ Usage:
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
-  background-color: var(--theme-primary);
 }
 
 header {
   background-color: var(--theme-black);
   color: var(--theme-background);
   padding: var(--text-padding-small);
+  font-size: var(--font-size-smallish);
 }
 
 header nav a {
@@ -179,19 +179,22 @@ header nav a {
 }
 
 .optional-sidebar-layout > nav {
-  flex: 0 25ch;
+  flex: 1 25ch;
   color: var(--theme-background);
   background-color: var(--theme-primary);
   padding: var(--text-padding-small);
 }
 
 .optional-sidebar-layout > article {
-  flex: 3 50ch;
+  flex: 10 50ch;
   padding: var(--text-padding-medium);
-  max-inline-size: var(--max-line-width);
   font-size: var(--font-size-medium);
   color: var(--theme-primary);
   background-color: var(--theme-background);
+}
+
+article p {
+  max-width: var(--max-line-width);
 }
 
 .navigation-list {
