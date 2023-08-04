@@ -14,11 +14,32 @@
   font-style: italic;
 }
 
+/* latin-ext */
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  src: url("./Inconsolata/inconsolata-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-variation-settings: "wdth" 115;;
+  src: url("./Inconsolata/inconsolata-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 html {
   --theme-primary: #210423;
   --theme-background: #b2b8c0;
   --theme-black: #101010;
   --theme-link: #0001b5;
+  --theme-highlight: #d4bfff;
 
   --font-size-very-small: 0.75rem;   /* 12px */
   --font-size-quite-small: 0.875rem; /* 14px */
@@ -60,6 +81,14 @@ body {
   margin: 0;
 }
 
+code {
+  font-family: 'Source Code Pro', monospace;
+}
+
+pre code {
+  font-size: var(--font-size-smallish);
+}
+
 /*
   Default margin between paragraphs and block elements
 */
@@ -82,6 +111,10 @@ html { height: 100%;}
 p {
   overflow-wrap: break-word;
   hyphens: auto;
+}
+
+p code {
+  background-color: var(--theme-highlight);
 }
 
 h1 {
@@ -107,18 +140,14 @@ h3 {
 
 h4 {
   font-size: var(--font-size-medium);
-  font-weight: 900;
 }
 
 h5 {
-  font-size: var(--font-size-medium);
-  font-variant: small-caps;
+  font-size: var(--font-size-smallish);
 }
 
 h6 {
-  font-size: var(--font-size-medium);
-  font-weight: 900;
-  font-variant: small-caps;
+  font-size: var(--font-size-small);
 }
 
 /*
