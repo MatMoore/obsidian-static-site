@@ -15,7 +15,7 @@
   <nav>
     <ul class="horizontal-list">
       <% top_level_nav.each_with_index do |section, i| %>
-      <li <%= i == 0? "class=\"selected\"" : "" %>><%= link_page(section) %></li>
+      <li <%= (page_section == section) ? "class=\"selected\"" : "" %>><%= link_page(section) %></li>
       <% end %>
     </ul>
   </nav>

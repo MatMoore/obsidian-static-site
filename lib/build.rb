@@ -3,6 +3,8 @@ require 'cgi'
 require_relative 'helpers'
 
 class Build
+  SECTIONS = ['Howto', 'Concepts', 'Technologies']
+
   def initialize(output_dir, parser)
     @output_dir = output_dir
     @parser = parser
@@ -22,7 +24,7 @@ class Build
     pages_to_generate.each do |p|
       p.walk_tree do |page|
         navigation = if page.slug == "" || page.slug == "index"
-          sections
+          [parser.index.find_in_tree("Concepts")]
         elsif page.is_index?
           [page]
         else
@@ -38,6 +40,7 @@ class Build
           content: page.content&.generate_html,
           top_level_nav: sections,
           navigation: navigation,
+          page_section: get_section(page) || parser.index.find_in_tree("Concepts")
         )
 
         file_path = output_dir + page.slug
@@ -70,8 +73,8 @@ class Build
       title: CGI.escape_html("Stuff & things"),
       meta_description: CGI.escape_html("In which we define \"stuff\" and \"things\""),
       content: "<p>Hello world</p>",
-      top_level_nav: parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
-      navigation: parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) },
+      top_level_nav: parser.index.children.filter {|d| SECTIONS.include?(d.title) },
+      navigation: parser.index.children.filter {|d| SECTIONS.include?(d.title) },
     )
 
     file_path = output_dir + 'page.html'
@@ -86,4 +89,16 @@ class Build
 
   attr_reader :output_dir
   attr_reader :parser
+
+  private
+
+  def get_section(page)
+    return nil if page.nil?
+
+    if SECTIONS.include?(page.title)
+      page
+    else
+      get_section(page.parent)
+    end
+  end
 end
