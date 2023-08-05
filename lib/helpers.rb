@@ -3,10 +3,15 @@ require 'tilt/erb'
 class Helpers
   def initialize
     @nav_template = Tilt::ERBTemplate.new("templates/nav_section.html.erb")
+    @index_template = Tilt::ERBTemplate.new("templates/generated_index.html.erb")
   end
 
   def render_nav(navigation, level: 1, max_level: 3)
     @nav_template.render(self, navigation: navigation, level: level, max_level: max_level)
+  end
+
+  def render_index(children)
+    @index_template.render(self, children: children)
   end
 
   def header_tag(level)

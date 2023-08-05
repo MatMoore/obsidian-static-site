@@ -1,0 +1,25 @@
+<div class="index">
+  <% directories = children.select(&:is_index?) %>
+
+  <% if directories.any? %>
+    <h2>Sections</h2>
+    <% directories.each do |child| %>
+      <h3><%= link_page(child) %></h2>
+      <ul>
+      <% child.children.each do |grandchild| %>
+      <li><%= link_page(grandchild) %></li>
+      <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <% pages = children.reject(&:is_index?) %>
+  <% if pages.any? %>
+    <h2>Pages</h2>
+    <ul>
+    <% pages.each do |child| %>
+    <li><%= link_page(child) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>

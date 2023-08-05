@@ -31,7 +31,13 @@ class Build
           [page.parent]
         end
 
-        title = page.title == "" ? "Knowledge base" : page.title
+        if page.title == ""
+          title = "Knowledge base"
+        elsif page.is_index?
+          title = "Index: #{page.title}"
+        else
+          title = page.title
+        end
 
         output = template.render(
           helpers,
@@ -40,7 +46,8 @@ class Build
           content: page.content&.generate_html,
           top_level_nav: sections,
           navigation: navigation,
-          page_section: get_section(page) || parser.index.find_in_tree("Concepts")
+          page_section: get_section(page) || parser.index.find_in_tree("Concepts"),
+          children: page.children
         )
 
         file_path = output_dir + page.slug
