@@ -47,7 +47,8 @@ class Build
           top_level_nav: sections,
           navigation: navigation,
           page_section: get_section(page) || parser.index.find_in_tree("Concepts"),
-          children: page.children
+          children: page.children,
+          page: page
         )
 
         file_path = output_dir + page.slug

@@ -12,7 +12,7 @@
  <body class="full-height-with-header">
  <header>
   <a class="skip-link" href='#content'>Skip to content</a>
-  <nav>
+  <nav id="section-nav" aria-label="Sections">
     <ul class="horizontal-list">
       <% top_level_nav.each_with_index do |section, i| %>
       <li <%= (page_section == section) ? "class=\"selected\"" : "" %>><%= link_page(section) %></li>
@@ -21,10 +21,11 @@
   </nav>
  </header>
  <div class="optional-sidebar-layout optional-sidebar-layout-full-height">
-  <nav>
+  <nav id="sidebar-nav" aria-label="Site navigation">
     <%= render_nav(navigation, max_level: 2) %>
   </nav>
   <article id="content">
+    <%= render_breadcrumbs(page) %>
     <h1><%= title %></h1>
     <% if content.nil? %>
     <%= render_index(children) %>

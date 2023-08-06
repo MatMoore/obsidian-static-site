@@ -51,6 +51,7 @@ html {
   --standard-line-height: 1.5;
 
   --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
   --spacing-4: 1rem;
   --spacing-6: 1.5rem;
 
@@ -244,27 +245,33 @@ article p {
   text-decoration: none;
 }
 
-nav a {
+#sidebar-nav a {
   color: var(--theme-background);
 }
 
-nav h1 {
+#sidebar-nav h1 {
   font-size: var(--font-size-medium);
   margin-top: 0.5lh;
   margin-bottom: 0.25lh;
 }
 
-nav h1:first-child {
+#sidebar-nav h1:first-child {
   margin-top: 0;
 }
 
-nav h2, nav h3, nav h4, nav h5 {
+#sidebar-nav h2,
+#sidebar-nav h3,
+#sidebar-nav h4,
+#sidebar-nav h5 {
   font-size: var(--font-size-smallish);
   margin-top: calc(2 * (var(--vertical-space-2) - 1lh) / 3);
   margin-bottom: calc((var(--vertical-space-2) - 1lh) / 3);
 }
 
-nav h2:first-child, h3:first-child, h4:first-child, h5:first-child {
+#sidebar-nav h2:first-child,
+.optional-sidebar-layout h3:first-child,
+.optional-sidebar-layout h4:first-child,
+.optional-sidebar-layout h5:first-child {
   margin-top: 0;
 }
 
@@ -276,4 +283,35 @@ nav h2:first-child, h3:first-child, h4:first-child, h5:first-child {
 
 .full-height-with-header .optional-sidebar-layout {
   flex-grow: 1;
+}
+
+/*
+  Breadcrumb component
+*/
+#breadcrumb ul {
+  margin-top: calc((var(--vertical-space-1) - 1lh) / 2);
+  margin-bottom: calc((var(--vertical-space-1) - 1lh) / 2);
+  font-size: var(--font-size-smallish);
+  list-style-type: none;
+  padding: 0;
+}
+
+#breadcrumb li {
+  display: inline-block;
+  margin-left: 0;
+}
+
+#breadcrumb li:before {
+  content: ">";
+  margin-left: var(--spacing-2);
+  margin-right: var(--spacing-2);
+}
+
+#breadcrumb li:first-child {
+  margin-left: 0;
+}
+
+#breadcrumb li:first-child:before {
+  content: none;
+  display: none;
 }

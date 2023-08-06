@@ -4,6 +4,7 @@ class Helpers
   def initialize
     @nav_template = Tilt::ERBTemplate.new("templates/nav_section.html.erb")
     @index_template = Tilt::ERBTemplate.new("templates/generated_index.html.erb")
+    @breadcrumb_template = Tilt::ERBTemplate.new("templates/breadcrumb.html.erb")
   end
 
   def render_nav(navigation, level: 1, max_level: 3)
@@ -12,6 +13,21 @@ class Helpers
 
   def render_index(children)
     @index_template.render(self, children: children)
+  end
+
+  def render_breadcrumbs(page)
+    anscestors = []
+    current = page
+    while !current.parent.nil? && !current.parent&.parent.nil?
+      anscestors << current.parent
+      current = current.parent
+    end
+
+    @breadcrumb_template.render(self, page: page, breadcrumbs: anscestors.reverse)
+  end
+
+  def escape(str)
+    CGI.escape_html(str)
   end
 
   def header_tag(level)

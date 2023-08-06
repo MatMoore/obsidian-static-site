@@ -1,0 +1,7 @@
+<% unless page.parent.nil? || page.parent.parent.nil? %>
+<nav id="breadcrumb" aria-label="Breadcrumb trail">
+  <ul>
+    <% breadcrumbs.each do |breadcrumb| %><li><%= link_page(breadcrumb) %></li><% end %><li><%= escape(page.title) %></li>
+  </ul>
+</nav>
+<% end %>
