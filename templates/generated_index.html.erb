@@ -4,7 +4,7 @@
   <% if directories.any? %>
     <h2>Sections</h2>
     <% directories.each do |child| %>
-      <h3><%= link_page(child) %></h2>
+      <h3><%= link_page(child) %></h3>
       <ul>
       <% child.children.each do |grandchild| %>
       <li><%= link_page(grandchild) %></li>
