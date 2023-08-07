@@ -18,7 +18,7 @@ class Helpers
   def render_breadcrumbs(page)
     anscestors = []
     current = page
-    while !current.parent.nil? && !current.parent&.parent.nil?
+    while !current.parent.nil?
       anscestors << current.parent
       current = current.parent
     end
@@ -45,7 +45,11 @@ class Helpers
   def link_page(page)
     href = "/#{page.slug}/"
 
-    link_tag(href, page.title)
+    if page.parent.nil?
+      link_tag(href, "Home")
+    else
+      link_tag(href, page.title)
+    end
   end
 
   def link_tag(href, link_text)
