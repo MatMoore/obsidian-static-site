@@ -11,41 +11,38 @@ class PageBuilder
   end
 
   def build(page)
-    navigation = if page.slug == "" || page.slug == "index"
-      [index.find_in_tree("Concepts")].compact
-    elsif page.is_index?
-      [page]
-    else
-      [page.parent]
-    end
-
-    if page.title == ""
-      title = "Knowledge base"
-    elsif page.is_index?
-      title = "Index: #{page.title}"
-    else
-      title = page.title
-    end
-
     output = template.render(
       helpers,
-      title: CGI.escape_html(title),
-      meta_description: CGI.escape_html(title),
+      title: CGI.escape_html(get_title(page)),
+      meta_description: CGI.escape_html(get_title(page)),
       content: page.content&.generate_html,
       top_level_nav: top_level_nav,
-      navigation: navigation,
+      navigation: get_navigation(page),
       page_section: get_section(page) || index.find_in_tree("Concepts"),
       children: page.children,
       page: page
     )
   end
 
-  private
+  def get_title(page)
+    if page.title == ""
+      "Knowledge base"
+    elsif page.is_index?
+      "Index: #{page.title}"
+    else
+      page.title
+    end
+  end
 
-  attr_reader :template
-  attr_reader :index
-  attr_reader :helpers
-  attr_reader :top_level_nav
+  def get_navigation(page)
+    if page.parent.nil?
+      [index.find_in_tree("Concepts")].compact
+    elsif page.is_index?
+      [page]
+    else
+      [page.parent]
+    end
+  end
 
   def get_section(page)
     return nil if page.nil?
@@ -56,4 +53,11 @@ class PageBuilder
       get_section(page.parent)
     end
   end
+
+  private
+
+  attr_reader :template
+  attr_reader :index
+  attr_reader :helpers
+  attr_reader :top_level_nav
 end
