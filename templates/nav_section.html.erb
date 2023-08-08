@@ -1,18 +1,16 @@
-<% unless navigation.empty? %>
-  <% navigation.each do |page| %>
-    <% if level == max_level %>
-    <li><%= link_page(page) %></li>
-    <% else %>
-    <%= header_tag(level) { link_page(page) } %>
-    <ul class="navigation-list">
-      <% if page.is_index? %>
-      <% page.children.each do |nav_entry| %>
-      <li><%= link_page(nav_entry) %></li>
-      <% end %>
-      <% else %>
-      <li><%= render_nav(page.children, level: level + 1, max_level: max_level) %></li>
-      <% end %>
-    </ul>
+<% unless page.nil? %>
+  <% if level == max_level %>
+  <li><%= link_page(page) %></li>
+  <% else %>
+  <%= header_tag(level) { link_page(page) } %>
+  <ul class="navigation-list">
+    <% if page.is_index? %>
+    <% page.children.each do |nav_entry| %>
+    <li><%= link_page(nav_entry) %></li>
     <% end %>
+    <% else %>
+    <li><%= render_nav(page.children, level: level + 1, max_level: max_level) %></li>
+    <% end %>
+  </ul>
   <% end %>
 <% end %>

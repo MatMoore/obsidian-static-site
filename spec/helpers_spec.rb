@@ -11,20 +11,18 @@ describe(Helpers) do
     it "renders 2 levels" do
       navigation = Obsidian::Page.create_root
       navigation.add_page("foo/bar")
-      navigation.add_page("a/b/c")
+      navigation.add_page("foo/bar/baz")
 
-      result = helpers.render_nav(navigation.children, max_level: 2)
+      result = helpers.render_nav(navigation.children[0], max_level: 2)
       document = Oga.parse_html(result)
 
       expect(document).to contain_css('h1:root > a[href="/foo/"]')
-      expect(document).to contain_css('h1:root > a[href="/a/"]')
-      expect(document).to contain_css('ul.navigation-list:root > li > a[href="/a/b/"]')
       expect(document).to contain_css('ul.navigation-list:root > li > a[href="/foo/bar/"]')
-      expect(document).not_to contain_css('a[href="/a/b/c"]')
+      expect(document).not_to contain_css('a[href="/foo/bar/baz"]')
     end
 
     it "does not render an empty navigation" do
-      result = helpers.render_nav([])
+      result = helpers.render_nav(nil)
       expect(result).to eq("")
     end
   end

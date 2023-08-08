@@ -17,7 +17,7 @@ class PageBuilder
       meta_description: CGI.escape_html(get_title(page)),
       content: page.content&.generate_html,
       top_level_nav: top_level_nav,
-      navigation: get_navigation(page),
+      navigation_root: get_navigation_root(page),
       page_section: get_section(page) || index.find_in_tree("Concepts"),
       children: page.children,
       page: page
@@ -34,13 +34,13 @@ class PageBuilder
     end
   end
 
-  def get_navigation(page)
+  def get_navigation_root(page)
     if page.parent.nil?
-      [index.find_in_tree("Concepts")].compact
+      index.find_in_tree("Concepts")
     elsif page.is_index?
-      [page]
+      page
     else
-      [page.parent]
+      page.parent
     end
   end
 

@@ -79,31 +79,31 @@ describe PageBuilder do
     end
   end
 
-  describe "#get_navigation" do
+  describe "#get_navigation_root" do
     it "uses concepts navigation for the root" do
       concepts = root_page.add_page("Concepts")
 
-      navigation = page_builder.get_navigation(root_page)
+      navigation = page_builder.get_navigation_root(root_page)
 
-      expect(navigation).to eq([concepts])
+      expect(navigation).to eq(concepts)
     end
 
     it "uses the page for an index page" do
       page = root_page.add_page("foo")
       page.add_page("bar")
 
-      navigation = page_builder.get_navigation(page)
+      navigation = page_builder.get_navigation_root(page)
 
-      expect(navigation).to eq([page])
+      expect(navigation).to eq(page)
     end
 
     it "uses the parent for a non-index page" do
       page1 = root_page.add_page("foo")
       page2 = page1.add_page("bar")
 
-      navigation = page_builder.get_navigation(page2)
+      navigation = page_builder.get_navigation_root(page2)
 
-      expect(navigation).to eq([page1])
+      expect(navigation).to eq(page1)
     end
 
     describe "#get_section" do
