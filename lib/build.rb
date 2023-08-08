@@ -1,6 +1,4 @@
-require 'tilt/erb'
-require 'cgi'
-require_relative 'helpers'
+require_relative "page_builder"
 
 class Build
   SECTIONS = ['Howto', 'Concepts', 'Technologies']
@@ -8,6 +6,10 @@ class Build
   def initialize(output_dir, parser)
     @output_dir = output_dir
     @parser = parser
+    @page_builder = PageBuilder.new(
+      index: parser.index,
+      top_level_nav: top_level_nav
+    )
   end
 
   def clean
@@ -16,40 +18,10 @@ class Build
   end
 
   def generate_site
-    template = Tilt::ERBTemplate.new('templates/page.html.erb')
-    helpers = Helpers.new
-    sections = parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
-
-    pages_to_generate = [parser.index] + sections
+    pages_to_generate = [parser.index] + top_level_nav
     pages_to_generate.each do |p|
       p.walk_tree do |page|
-        navigation = if page.slug == "" || page.slug == "index"
-          [parser.index.find_in_tree("Concepts")]
-        elsif page.is_index?
-          [page]
-        else
-          [page.parent]
-        end
-
-        if page.title == ""
-          title = "Knowledge base"
-        elsif page.is_index?
-          title = "Index: #{page.title}"
-        else
-          title = page.title
-        end
-
-        output = template.render(
-          helpers,
-          title: CGI.escape_html(title),
-          meta_description: CGI.escape_html(title),
-          content: page.content&.generate_html,
-          top_level_nav: sections,
-          navigation: navigation,
-          page_section: get_section(page) || parser.index.find_in_tree("Concepts"),
-          children: page.children,
-          page: page
-        )
+        output = page_builder.build(page)
 
         file_path = output_dir + page.slug
 
@@ -73,40 +45,17 @@ class Build
     end
   end
 
-  def generate_example
-    template = Tilt::ERBTemplate.new('templates/page.html.erb')
-
-    output = template.render(
-      Helpers.new,
-      title: CGI.escape_html("Stuff & things"),
-      meta_description: CGI.escape_html("In which we define \"stuff\" and \"things\""),
-      content: "<p>Hello world</p>",
-      top_level_nav: parser.index.children.filter {|d| SECTIONS.include?(d.title) },
-      navigation: parser.index.children.filter {|d| SECTIONS.include?(d.title) },
-    )
-
-    file_path = output_dir + 'page.html'
-    File.open(file_path, 'w') do |f|
-      f.write(output)
-    end
-  end
-
   def copy_assets
     FileUtils.cp_r('assets', output_dir + 'assets')
   end
 
   attr_reader :output_dir
   attr_reader :parser
+  attr_reader :page_builder
 
   private
 
-  def get_section(page)
-    return nil if page.nil?
-
-    if SECTIONS.include?(page.title)
-      page
-    else
-      get_section(page.parent)
-    end
+  def top_level_nav
+     parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
   end
 end
