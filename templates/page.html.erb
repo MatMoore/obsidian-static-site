@@ -7,6 +7,19 @@
   <meta name="description" content="<%= meta_description %>">
   <link rel="stylesheet" type="text/css" href="/assets/site.css">
   <script src="/assets/prism.js" defer></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+  </script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js" defer></script>
  </head>
  <body class="full-height-with-header">
  <header>
