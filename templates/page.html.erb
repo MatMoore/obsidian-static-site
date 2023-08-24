@@ -21,9 +21,6 @@
   </nav>
  </header>
  <div class="optional-sidebar-layout optional-sidebar-layout-full-height">
-  <nav id="sidebar-nav" aria-label="Site navigation">
-    <%= render_nav(navigation_root, max_level: 2) %>
-  </nav>
   <article id="content">
     <%= render_breadcrumbs(page) %>
     <h1><%= title %></h1>
@@ -33,6 +30,9 @@
     <%= content %>
     <% end %>
   </article>
+  <nav id="sidebar-nav" aria-label="Site navigation">
+    <%= render_nav(navigation_root, max_level: 2) %>
+  </nav>
  </div>
  </body>
 </html>
