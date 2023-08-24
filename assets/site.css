@@ -191,8 +191,27 @@ header nav a {
   background-color: var(--theme-background);
 }
 
-article p {
-  max-width: var(--max-line-width);
+.centered-content {
+  display: grid;
+  grid-template-columns:
+    1fr
+    min(var(--max-line-width), 100%)
+    1fr;
+}
+
+.centered-content > * {
+  grid-column: 2;
+}
+
+.centered-content img, .centered-content pre.code-block, .centered-content video {
+  min-width: fit-content;
+  grid-column: 1 / -1;
+}
+
+body >  {
+  position: relative;
+  max-width: 40rem;
+  margin: auto;
 }
 
 .navigation-list {

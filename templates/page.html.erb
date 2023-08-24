@@ -23,12 +23,14 @@
  <div class="optional-sidebar-layout optional-sidebar-layout-full-height">
   <article id="content">
     <%= render_breadcrumbs(page) %>
+    <div class="centered-content">
     <h1><%= title %></h1>
     <% if content.nil? %>
     <%= render_index(children) %>
     <% else %>
     <%= content %>
     <% end %>
+    </div>
   </article>
   <nav id="sidebar-nav" aria-label="Site navigation">
     <%= render_nav(navigation_root, max_level: 2) %>
