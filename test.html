@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <link rel="stylesheet" type="text/css" href="assets/site.css">
-  <link rel="stylesheet" type="text/css" href="assets/prism.css">
   <script src="assets/prism.js" defer></script>
  </head>
  <body class="full-height-with-header">
@@ -43,8 +42,9 @@ output = ERB.new(template).result_with_hash(
   meta_description: CGI.escape_html("In which we define \"stuff\" and \"things\""),
   content: "&lt;p&gt;Hello world&lt;/p&gt;",
   navigation: generate_example_nav
-)
-  </code></pre>
+)</code></pre>
+  <p>Following para</p>
+  <pre><code>System.out.println("Hello world");</code></pre>
     <h3>this is a H3</h3>
     <p>Some text</p>
     <h4>this is a h4</h4>
