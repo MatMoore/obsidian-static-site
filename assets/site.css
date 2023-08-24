@@ -57,7 +57,7 @@ html {
 
 
   /*
-    Vertical spacings that are aligned with the medium font's line height
+    Vertical spacings that are aligned with the body line height
   */
   --vertical-space-1: calc(var(--font-size-medium) * var(--standard-line-height) * 1);
   --vertical-space-2: calc(var(--font-size-medium) * var(--standard-line-height) * 2);
@@ -148,7 +148,7 @@ h6 {
 
 /*
 A layout where the first child acts as a sidebar on wide screens,
-and a footer on narrow screens.
+and a header on narrow screens.
 
 Usage:
 
@@ -160,7 +160,7 @@ Usage:
 .optional-sidebar-layout {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
 }
 
 header {
