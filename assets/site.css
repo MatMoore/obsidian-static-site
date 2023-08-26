@@ -117,7 +117,7 @@ pre code {
 */
 article * {
   margin-top: 0;
-  margin-bottom: 1lh;
+  margin-bottom: 1.5em;
 }
 
 article a {
@@ -146,8 +146,8 @@ h1 {
 
 h2, h3, h4, h5, h6 {
   font-weight: bold;
-  margin-top: calc(2 * (var(--vertical-space-3) - 1lh) / 3);
-  margin-bottom: calc((var(--vertical-space-3) - 1lh) / 3);
+  margin-top: calc(2 * (var(--vertical-space-3) - 1.5em) / 3);
+  margin-bottom: calc((var(--vertical-space-3) - 1.5em) / 3);
 }
 
 h2 {
@@ -245,7 +245,7 @@ body >  {
   margin-top: 0;
   margin-right: 0;
   margin-left: var(--spacing-1);
-  margin-bottom: 1lh;
+  margin-bottom: 1.5em;
   border-left: 3px solid var(--theme-background);
   padding-left: var(--spacing-3);
 }
@@ -311,8 +311,8 @@ body >  {
 #sidebar-nav h4,
 #sidebar-nav h5 {
   font-size: var(--font-size-smallish);
-  margin-top: calc(2 * (var(--vertical-space-2) - 1lh) / 3);
-  margin-bottom: calc((var(--vertical-space-2) - 1lh) / 3);
+  margin-top: calc(2 * (var(--vertical-space-2) - 1.5em) / 3);
+  margin-bottom: calc((var(--vertical-space-2) - 1.5em) / 3);
 }
 
 #sidebar-nav h2:first-child,
@@ -336,8 +336,8 @@ body >  {
   Breadcrumb component
 */
 #breadcrumb ul {
-  margin-top: calc((var(--vertical-space-1) - 1lh) / 2);
-  margin-bottom: calc((var(--vertical-space-1) - 1lh) / 2);
+  margin-top: calc((var(--vertical-space-1) - 1.5em) / 2);
+  margin-bottom: calc((var(--vertical-space-1) - 1.5em) / 2);
   font-size: var(--font-size-smallish);
   list-style-type: none;
   padding: 0;
