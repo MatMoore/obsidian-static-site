@@ -136,18 +136,14 @@ p {
   hyphens: auto;
 }
 
-
-h1 {
-  font-size: var(--font-size-very-big);
-  font-weight: bold;
-  margin-top: calc((var(--vertical-space-4) - var(--font-size-very-big)) / 2);
-  margin-bottom: calc((var(--vertical-space-4) - var(--font-size-very-big)) / 2);
-}
-
-h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   margin-top: calc(2 * (var(--vertical-space-3) - 1.5em) / 3);
   margin-bottom: calc((var(--vertical-space-3) - 1.5em) / 3);
+}
+
+h1 {
+  font-size: var(--font-size-very-big);
 }
 
 h2 {
