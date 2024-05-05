@@ -38,7 +38,7 @@ html {
   --theme-light-background-1: #b2b8c0;
   --theme-dark-background-1: #210423;
   --theme-dark-background-2: rgb(10, 71, 7);
-  --theme-link: #0001b5;
+  --theme-link: #3532d7;
   --theme-highlight: #d4bfff;
   --theme-scrollbar: rgba(113, 113, 113, 0.5);
 
@@ -356,9 +356,13 @@ nav .horizontal-list a {
 /*
   Breadcrumb component
 */
+
+#breadcrumb {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 #breadcrumb ul {
-  margin-top: calc((var(--vertical-space-1) - 1.5em) / 2);
-  margin-bottom: calc((var(--vertical-space-1) - 1.5em) / 2);
   font-size: var(--font-size-smallish);
   list-style-type: none;
   padding: 0;
