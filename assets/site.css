@@ -40,6 +40,7 @@ html {
   --theme-dark-background-2: rgb(10, 71, 7);
   --theme-link: #0001b5;
   --theme-highlight: #d4bfff;
+  --theme-scrollbar: rgba(113, 113, 113, 0.5);
 
   --font-size-small: 1rem;           /* 16px */
   --font-size-smallish: 1.125rem;    /* 18px */
@@ -228,13 +229,18 @@ nav {
 
 .centered-content > * {
   grid-column: 2;
+  overflow: auto;
+  scrollbar-gutter: stable;
 }
 
-.centered-content img, .centered-content pre, .centered-content video {
-  max-width: fit-content;
-  grid-column: 1 / -1;
-  margin-left: auto;
-  margin-right: auto;
+.centered-content > *::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+.centered-content > *::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--theme-scrollbar);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 body >  {
