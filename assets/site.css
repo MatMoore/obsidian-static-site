@@ -35,9 +35,9 @@
 }
 
 html {
-  --theme-primary: #210423;
-  --theme-background: #b2b8c0;
-  --theme-black: #101010;
+  --theme-light-background-1: #b2b8c0;
+  --theme-dark-background-1: #210423;
+  --theme-dark-background-2: rgb(10, 71, 7);
   --theme-link: #0001b5;
   --theme-highlight: #d4bfff;
 
@@ -70,8 +70,8 @@ html {
 }
 
 body {
-  color: var(--theme-primary);
-  background-color: var(--theme-background);
+  background-color: var(--theme-light-background-1);
+  color: var(--theme-dark-background-1);
   font-size: var(--font-size-medium);
   font-family: 'Literata', serif;
   line-height: var(--standard-line-height); /* 30px */
@@ -184,7 +184,7 @@ Usage:
 }
 
 header {
-  background-color: var(--theme-black);
+  background-color: var(--theme-dark-background-2);
   color: var(--theme-back1round);
   padding: 0;
   font-size: var(--font-size-smallish);
@@ -195,22 +195,26 @@ header .horizontal-list {
 }
 
 header nav a {
-  color: var(--theme-background);
+  color: var(--theme-light-background-1);
+}
+
+nav {
+  margin-block: 0;
 }
 
 .optional-sidebar-layout > nav {
   flex: 1 25ch;
-  color: var(--theme-background);
-  background-color: var(--theme-primary);
+  color: var(--theme-light-background-1);
   padding: var(--spacing-6);
+  background-color: var(--theme-dark-background-1);
 }
 
 .optional-sidebar-layout > article {
   flex: 10 50ch;
   padding: var(--spacing-6);
   font-size: var(--font-size-medium);
-  color: var(--theme-primary);
-  background-color: var(--theme-background);
+  background-color: var(--theme-light-background-1);
+  color: var(--theme-dark-background-1);
 }
 
 .centered-content {
@@ -246,12 +250,17 @@ body >  {
   margin-right: 0;
   margin-left: var(--spacing-1);
   margin-bottom: 1.5em;
-  border-left: 3px solid var(--theme-background);
+  border-left: 3px solid var(--theme-light-background-1);
   padding-left: var(--spacing-3);
 }
 
 .navigation-list li {
   margin-bottom: 0.25lh;
+}
+
+nav .horizontal-list a {
+  font-weight: bold;
+  padding-inline: 0.5em;
 }
 
 .horizontal-list {
@@ -260,14 +269,14 @@ body >  {
   margin: 0;
   padding: 0;
   flex-direction: row;
-  justify-content: flex-end;
-  gap: 3ch;
+  justify-content: flex-start;
+  column-gap: 3ch;
+  row-gap: 1ch;
   flex-wrap: wrap;
 }
 
 .horizontal-list li {
   display: block;
-  background-color: var(--theme-primary);
   flex-shrink: 1;
   padding: var(--spacing-0);
 }
@@ -282,8 +291,8 @@ body >  {
   opacity: 0;
   padding: 1rem;
   margin: 0;
-  background-color: var(--theme-primary);
-  color: var(--theme-background);
+  color: var(--theme-light-background-1);
+  background-color: var(--theme-dark-background-1);
 }
 
 .skip-link:focus {
@@ -298,7 +307,7 @@ body >  {
 }
 
 #sidebar-nav a {
-  color: var(--theme-background);
+  color: var(--theme-light-background-1);
 }
 
 #sidebar-nav h1 {
@@ -346,6 +355,7 @@ body >  {
   font-size: var(--font-size-smallish);
   list-style-type: none;
   padding: 0;
+  margin-bottom: var(--spacing-3);
 }
 
 #breadcrumb li {
