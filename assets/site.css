@@ -36,6 +36,8 @@
 
 html {
   --theme-light-background-1: #b2b8c0;
+  --theme-light-background-2: #9eb1c9;
+  --theme-light-text-1: #b2b8c0;
   --theme-dark-background-1: #210423;
   --theme-dark-background-2: rgb(10, 71, 7);
   --theme-link: #3532d7;
@@ -115,7 +117,7 @@ pre code {
 
 /* Inline code */
 :not(pre) > code {
-  padding: .25em .5em;
+  padding-inline: .5em;
   border-radius: .3em;
   white-space: normal;
 }
@@ -193,7 +195,7 @@ Usage:
 
 header {
   background-color: var(--theme-dark-background-2);
-  color: var(--theme-back1round);
+  color: var(--theme-light-text-1);
   padding: 0;
   font-size: var(--font-size-smallish);
 }
@@ -291,7 +293,7 @@ nav .horizontal-list a {
 .horizontal-list li {
   display: block;
   flex-shrink: 1;
-  padding: var(--spacing-0);
+  padding: var(--spacing-1);
 }
 
 .skip-link {
@@ -468,4 +470,37 @@ nav .horizontal-list a {
 
 .token.entity {
   cursor: help;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid black;
+}
+
+th, td {
+  border-inline: 2px solid black;
+  padding-inline: var(--spacing-3);
+  padding-block: var(--spacing-1);
+}
+
+tr {
+  margin-block: var(--spacing-0);
+}
+
+thead, tfoot, tr {
+  border: 1px solid black;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--theme-light-background-1);
+}
+
+thead, tbody tr:nth-child(even) {
+  background-color: var(--theme-light-background-2);
+}
+
+thead {
+  font-weight: bold;
 }
