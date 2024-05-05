@@ -186,8 +186,12 @@ Usage:
 header {
   background-color: var(--theme-black);
   color: var(--theme-back1round);
-  padding: var(--spacing-4);
+  padding: 0;
   font-size: var(--font-size-smallish);
+}
+
+header .horizontal-list {
+  margin: var(--spacing-4);
 }
 
 header nav a {
@@ -270,17 +274,22 @@ body >  {
 
 .skip-link {
   position: absolute;
+  display: block;
   z-index: 999;
   left: -9999px;
+  width: 100%;
+  text-align: center;
   opacity: 0;
   padding: 1rem;
+  margin: 0;
   background-color: var(--theme-primary);
   color: var(--theme-background);
 }
 
 .skip-link:focus {
-  left: 50%;
-  transform: translateX(-50%);
+  position: static;
+  top:0;
+  left: 0;
   opacity: 1;
 }
 
