@@ -95,6 +95,12 @@ code {
   hyphens: none;
 }
 
+/* Inline code blocks */
+:not(pre) > code {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
  /* Code blocks */
  pre {
   padding: 1em;
