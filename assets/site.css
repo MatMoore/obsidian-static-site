@@ -61,6 +61,7 @@ html {
   /*
     Vertical spacings that are aligned with the body line height
   */
+  --vertical-space-0: calc(var(--font-size-medium) * var(--standard-line-height) * 0.5);
   --vertical-space-1: calc(var(--font-size-medium) * var(--standard-line-height) * 1);
   --vertical-space-2: calc(var(--font-size-medium) * var(--standard-line-height) * 2);
   --vertical-space-3: calc(var(--font-size-medium) * var(--standard-line-height) * 3);
@@ -138,8 +139,8 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
-  margin-top: calc(2 * (var(--vertical-space-3) - 1.5em) / 3);
-  margin-bottom: calc((var(--vertical-space-3) - 1.5em) / 3);
+  margin-top: 0;
+  margin-bottom: var(--vertical-space-0);
 }
 
 h1 {
