@@ -29,6 +29,10 @@ The code for parsing the contents of the vault is available as a gem, [obsidian-
   - `bundle config set local.obsidian_parser ../obsidian-parser`
   - `bundle install`
 
+## Usage
+
+- `bundle exec generator.rb`
+
 ## Licence
 
 MIT
