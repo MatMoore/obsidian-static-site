@@ -19,6 +19,16 @@ class Build
 
   def generate_site
     pages_to_generate = [parser.index] + top_level_nav
+
+    # Copy media files
+    parser.media.each do |a|
+      file_path = output_dir + a.slug
+      file_path.parent.mkpath
+      next if a.is_index?
+
+      FileUtils.copy(a.source_path, file_path)
+    end
+
     pages_to_generate.each do |p|
       p.walk_tree do |page|
         output = page_builder.build(page)
