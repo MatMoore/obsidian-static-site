@@ -15,7 +15,7 @@ class PageBuilder
       helpers,
       title: CGI.escape_html(get_title(page)),
       meta_description: CGI.escape_html(get_title(page)),
-      content: page.content&.generate_html,
+      content: page.generate_html,
       top_level_nav: top_level_nav,
       navigation_root: get_navigation_root(page),
       page_section: get_section(page) || index.find_in_tree("Concepts"),
