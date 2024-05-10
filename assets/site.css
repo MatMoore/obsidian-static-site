@@ -504,3 +504,8 @@ thead, tbody tr:nth-child(even) {
 thead {
   font-weight: bold;
 }
+
+article img {
+  margin-inline: auto;
+  display: block;
+}
