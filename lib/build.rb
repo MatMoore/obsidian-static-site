@@ -18,7 +18,20 @@ class Build
   end
 
   def generate_site
-    pages_to_generate = [parser.index] + top_level_nav
+    top_level_nav.each do |page|
+      page.mark_referenced
+    end
+
+    parser.index.walk_tree do |page|
+      next if page.content.nil?
+
+      parsed_page = page.parse
+
+      page.mark_referenced if parsed_page&.frontmatter["public"]
+    end
+
+    # Remove pages without "public" in the frontmatter
+    parser.index.prune!
 
     # Copy media files
     parser.media.each do |a|
@@ -29,28 +42,27 @@ class Build
       FileUtils.copy(a.source_path, file_path)
     end
 
-    pages_to_generate.each do |p|
-      p.walk_tree do |page|
-        output = page_builder.build(page)
+    # Generate all the pages
+    parser.index.walk_tree do |page|
+      output = page_builder.build(page, page.parse)
 
-        file_path = output_dir + page.slug
+      file_path = output_dir + page.slug
 
-        # Map every page to a directory with an index, regardless of whether
-        # it has any children. This enables child pages to be added in the
-        # future without changing the parent URL.
-        # I.e. rather than foo/bar.html evolving into foo/bar and foo/bar/*
-        # we have foo/bar evolving into foo/bar and foo/bar/*
-        html_path = if page.is_index?
-          file_path + "index.html"
-        else
-          file_path.dirname + file_path.basename + "index.html"
-        end
+      # Map every page to a directory with an index, regardless of whether
+      # it has any children. This enables child pages to be added in the
+      # future without changing the parent URL.
+      # I.e. rather than foo/bar.html evolving into foo/bar and foo/bar/*
+      # we have foo/bar evolving into foo/bar and foo/bar/*
+      html_path = if page.is_index?
+        file_path + "index.html"
+      else
+        file_path.dirname + file_path.basename + "index.html"
+      end
 
-        html_path.dirname.mkpath
+      html_path.dirname.mkpath
 
-        File.open(html_path, 'w') do |f|
-          f.write(output)
-        end
+      File.open(html_path, 'w') do |f|
+        f.write(output)
       end
     end
   end

@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/matmoore/obsidian-parser.git
-  revision: 0d9fa240d86c4943c1b444ce7d23c03a2f38c6b2
+  revision: 161187564fa1de859318544e3bd930bde538fbf8
   branch: main
   specs:
     obsidian-parser (0.7.0)
       marcel (~> 0.3.1)
       markly (~> 0.7.0)
+      tilt (~> 2.0, >= 2.0.8)
 
 GEM
   remote: https://rubygems.org/

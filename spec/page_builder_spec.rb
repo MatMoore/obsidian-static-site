@@ -15,7 +15,7 @@ describe PageBuilder do
   }
 
   subject(:result) do
-    page_builder.build(root_page)
+    page_builder.build(root_page, root_page.parse)
   end
 
   let(:document) { Oga.parse_html(result) }
@@ -37,13 +37,13 @@ describe PageBuilder do
 
     context "when the page is an index with content" do
       let(:page) { Obsidian::Page.new(title: "", slug: "", content: content) }
-      let(:content) { double(:content, generate_html: "hello world")}
+      let(:content) { Proc.new { "hello world" } }
 
       subject(:result) do
         described_class.new(
           index: page,
           top_level_nav: page.children
-        ).build(page)
+        ).build(page, page.parse)
       end
 
       before do
