@@ -35,13 +35,17 @@
 }
 
 html {
-  --theme-light-background-1: #b2b8c0;
-  --theme-light-background-2: #9eb1c9;
-  --theme-light-text-1: #b2b8c0;
-  --theme-dark-background-1: #210423;
-  --theme-dark-background-2: rgb(10, 71, 7);
-  --theme-link: #3532d7;
-  --theme-highlight: #d4bfff;
+  --theme-light-background-a: hsl(261, 50%, 85%);
+  --theme-light-background-b: hsl(0, 0%, 90%);
+  --theme-light-background-c: hsl(141, 92%, 90%);
+  --theme-light-text-a: hsl(261, 10%, 90%);
+  --theme-light-text-b: hsl(21, 10%, 90%);
+  --theme-dark-text-a: hsl(261, 10%, 10%);
+  --theme-dark-background-a: hsl(261, 92%, 25%);
+  --theme-dark-background-b: hsl(21, 92%, 25%);
+  --theme-dark-background-c: hsl(141, 92%, 25%);
+  --theme-link: hsl(21, 92%, 40%);
+  --theme-highlight: hsl(261, 92%, 90%);
   --theme-scrollbar: rgba(113, 113, 113, 0.5);
 
   --font-size-small: 1rem;           /* 16px */
@@ -74,8 +78,8 @@ html {
 }
 
 body {
-  background-color: var(--theme-light-background-1);
-  color: var(--theme-dark-background-1);
+  background-color: var(--theme-light-background-b);
+  color: var(--theme-dark-text-a);
   font-size: var(--font-size-medium);
   font-family: 'Literata', serif;
   line-height: var(--standard-line-height); /* 30px */
@@ -194,8 +198,8 @@ Usage:
 }
 
 header {
-  background-color: var(--theme-dark-background-2);
-  color: var(--theme-light-text-1);
+  background-color: var(--theme-dark-background-a);
+  color: var(--theme-light-text-a);
   padding: 0;
   font-size: var(--font-size-smallish);
 }
@@ -205,7 +209,7 @@ header .horizontal-list {
 }
 
 header nav a {
-  color: var(--theme-light-background-1);
+  color: var(--theme-light-text-a);
 }
 
 nav {
@@ -214,17 +218,17 @@ nav {
 
 .optional-sidebar-layout > nav {
   flex: 1 25ch;
-  color: var(--theme-light-background-1);
+  color: var(--theme-light-text-a);
   padding: var(--spacing-6);
-  background-color: var(--theme-dark-background-1);
+  background-color: var(--theme-dark-background-a);
 }
 
 .optional-sidebar-layout > article {
   flex: 10 50ch;
   padding: var(--spacing-6);
   font-size: var(--font-size-medium);
-  background-color: var(--theme-light-background-1);
-  color: var(--theme-dark-background-1);
+  background-color: var(--theme-light-background-b);
+  color: var(--theme-dark-text-a);
 }
 
 .centered-content {
@@ -322,7 +326,7 @@ nav .horizontal-list a {
 }
 
 #sidebar-nav a {
-  color: var(--theme-light-background-1);
+  color: var(--theme-light-text-a);
 }
 
 #sidebar-nav h1 {
@@ -494,11 +498,11 @@ thead, tfoot, tr {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: var(--theme-light-background-1);
+  background-color: var(--theme-light-background-b);
 }
 
 thead, tbody tr:nth-child(even) {
-  background-color: var(--theme-light-background-2);
+  background-color: var(--theme-light-background-a);
 }
 
 thead {
