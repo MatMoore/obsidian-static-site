@@ -44,7 +44,7 @@ html {
   --theme-dark-background-a: hsl(261, 92%, 25%);
   --theme-dark-background-b: hsl(21, 92%, 25%);
   --theme-dark-background-c: hsl(141, 92%, 25%);
-  --theme-link: hsl(21, 92%, 40%);
+  --theme-link: hsl(21, 100%, 30%);
   --theme-highlight: hsl(261, 92%, 90%);
   --theme-scrollbar: rgba(113, 113, 113, 0.5);
 

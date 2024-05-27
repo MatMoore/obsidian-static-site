@@ -46,7 +46,7 @@ class Helpers
     href = "/#{page.slug}/"
 
     if page.parent.nil?
-      link_tag(href, "Home")
+      link_tag("/", "Home")
     else
       link_tag(href, page.title)
     end
