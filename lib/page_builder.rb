@@ -28,7 +28,7 @@ class PageBuilder
     if page.title == ""
       "Knowledge base"
     elsif page.is_index?
-      "Index: #{page.title}"
+      "#{page.title} - index"
     else
       page.title
     end
