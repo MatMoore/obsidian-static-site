@@ -10,7 +10,7 @@
   font-family: "Literata";
   src:
     local("Literata"),
-    url("./Literata/Literata%5Bopsz%2Cwght%5D.woff2") format("opentype");
+    url("./Literata/Literata-Italic%5Bopsz%2Cwght%5D.woff2") format("opentype");
   font-style: italic;
 }
 
@@ -41,10 +41,11 @@ html {
   --theme-light-text-a: hsl(261, 10%, 90%);
   --theme-light-text-b: hsl(21, 10%, 90%);
   --theme-dark-text-a: hsl(261, 10%, 10%);
+  --theme-dark-text-b: hsl(261, 10%, 20%);
   --theme-dark-background-a: hsl(261, 92%, 25%);
-  --theme-dark-background-b: hsl(21, 92%, 25%);
+  --theme-dark-background-b: hsl(15, 92%, 25%);
   --theme-dark-background-c: hsl(141, 92%, 25%);
-  --theme-link: hsl(21, 100%, 30%);
+  --theme-link: hsl(15, 100%, 30%);
   --theme-highlight: hsl(261, 92%, 90%);
   --theme-scrollbar: rgba(113, 113, 113, 0.5);
 
@@ -73,6 +74,7 @@ html {
   --vertical-space-2: calc(var(--font-size-medium) * var(--standard-line-height) * 2);
   --vertical-space-3: calc(var(--font-size-medium) * var(--standard-line-height) * 3);
   --vertical-space-4: calc(var(--font-size-medium) * var(--standard-line-height) * 4);
+  --vertical-antispace-0: calc(0px - (var(--font-size-medium) * var(--standard-line-height) * 0.5));
 
   --max-line-width: 70ch;
 }
@@ -95,6 +97,10 @@ header {
 .optional-sidebar-layout > article {
   background-color: var(--theme-light-background-b);
   color: var(--theme-dark-text-a);
+}
+
+h1 + .last-updated {
+  color: var(--theme-dark-text-b);
 }
 
 article a {
@@ -527,4 +533,13 @@ thead {
 article img {
   margin-inline: auto;
   display: block;
+}
+
+.last-updated {
+  font-size: var(--font-size-smallish);
+  font-style: italic;
+}
+
+h1 + .last-updated {
+  margin-top: var(--vertical-antispace-0);
 }
