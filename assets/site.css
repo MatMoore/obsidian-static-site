@@ -40,6 +40,7 @@ html {
   --theme-light-background-c: hsl(141, 92%, 90%);
   --theme-light-text-a: hsl(261, 10%, 90%);
   --theme-light-text-b: hsl(21, 10%, 90%);
+  --theme-light-text-c: hsl(141, 10%, 90%);
   --theme-dark-text-a: hsl(261, 10%, 10%);
   --theme-dark-text-b: hsl(261, 10%, 20%);
   --theme-dark-background-a: hsl(261, 92%, 25%);
@@ -127,6 +128,12 @@ tbody tr:nth-child(odd) {
 thead, tbody tr:nth-child(even) {
   background-color: var(--theme-light-background-c);
 }
+
+.card, .card a {
+  color: var(--theme-light-text-c);
+  background-color: var(--theme-dark-background-c);
+}
+
 
 body {
   font-size: var(--font-size-medium);
@@ -542,4 +549,18 @@ article img {
 
 h1 + .last-updated {
   margin-top: var(--vertical-antispace-0);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: var(--spacing-6);
+  grid-row-gap: var(--spacing-6);
+}
+
+.card {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  margin-bottom: 0;
+  padding: var(--spacing-4);
 }

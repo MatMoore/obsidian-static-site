@@ -1,25 +1,26 @@
-<div class="index">
+<div class="cards">
   <% directories = children.select(&:is_index?) %>
 
   <% if directories.any? %>
-    <h2>Sections</h2>
     <% directories.each do |child| %>
+      <div class="card">
       <h3><%= link_page(child) %></h3>
       <ul>
-      <% child.children.each do |grandchild| %>
+      <% child.children.slice(0,3).each do |grandchild| %>
       <li><%= link_page(grandchild) %></li>
       <% end %>
       </ul>
+      </div>
     <% end %>
-  <% end %>
-
-  <% pages = children.reject(&:is_index?) %>
-  <% if pages.any? %>
-    <h2>Pages</h2>
-    <ul>
-    <% pages.each do |child| %>
-    <li><%= link_page(child) %></li>
-    <% end %>
-    </ul>
   <% end %>
 </div>
+
+<% pages = children.reject(&:is_index?) %>
+<% if pages.any? %>
+  <ul>
+  <% pages.each do |child| %>
+  <li><%= link_page(child) %></li>
+  <% end %>
+  </ul>
+<% end %>
+
