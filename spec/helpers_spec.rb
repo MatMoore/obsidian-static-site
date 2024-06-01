@@ -69,10 +69,9 @@ describe(Helpers) do
 
       items = document.css('li')
 
-      expect(items.map(&:text)).to eq(["Home", "foo", "bar", "baz"])
+      expect(items.map(&:text)).to eq(["Home", "foo", "bar"])
 
-      # first value is a bug
-      expect(items.map { |li| li.at_xpath("a")&.get("href") }).to eq(["//", "/foo/", "/foo/bar/", nil])
+      expect(items.map { |li| li.at_xpath("a")&.get("href") }).to eq(["/", "/foo/", "/foo/bar/"])
     end
   end
 
