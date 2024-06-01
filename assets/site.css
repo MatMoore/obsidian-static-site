@@ -80,6 +80,49 @@ html {
 body {
   background-color: var(--theme-light-background-b);
   color: var(--theme-dark-text-a);
+}
+
+header {
+  background-color: var(--theme-dark-background-b);
+  color: var(--theme-light-text-b);
+}
+
+.optional-sidebar-layout > nav {
+  color: var(--theme-light-text-b);
+  background-color: var(--theme-dark-background-b);
+}
+
+.optional-sidebar-layout > article {
+  background-color: var(--theme-light-background-b);
+  color: var(--theme-dark-text-a);
+}
+
+article a {
+  color: var(--theme-link);
+}
+
+.skip-link {
+  color: var(--theme-light-background-1);
+  background-color: var(--theme-dark-background-1);
+}
+
+header nav a {
+  color: var(--theme-light-text-a);
+}
+
+#sidebar-nav a {
+  color: var(--theme-light-text-a);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--theme-light-background-b);
+}
+
+thead, tbody tr:nth-child(even) {
+  background-color: var(--theme-light-background-c);
+}
+
+body {
   font-size: var(--font-size-medium);
   font-family: 'Literata', serif;
   line-height: var(--standard-line-height); /* 30px */
@@ -132,10 +175,6 @@ pre code {
 article * {
   margin-top: 0;
   margin-bottom: 1.5em;
-}
-
-article a {
-  color: var(--theme-link);
 }
 
 article li {
@@ -198,8 +237,6 @@ Usage:
 }
 
 header {
-  background-color: var(--theme-dark-background-a);
-  color: var(--theme-light-text-a);
   padding: 0;
   font-size: var(--font-size-smallish);
 }
@@ -208,27 +245,19 @@ header .horizontal-list {
   margin: var(--spacing-4);
 }
 
-header nav a {
-  color: var(--theme-light-text-a);
-}
-
 nav {
   margin-block: 0;
 }
 
 .optional-sidebar-layout > nav {
   flex: 1 25ch;
-  color: var(--theme-light-text-a);
   padding: var(--spacing-6);
-  background-color: var(--theme-dark-background-a);
 }
 
 .optional-sidebar-layout > article {
   flex: 10 50ch;
   padding: var(--spacing-6);
   font-size: var(--font-size-medium);
-  background-color: var(--theme-light-background-b);
-  color: var(--theme-dark-text-a);
 }
 
 .centered-content {
@@ -310,8 +339,6 @@ nav .horizontal-list a {
   opacity: 0;
   padding: 1rem;
   margin: 0;
-  color: var(--theme-light-background-1);
-  background-color: var(--theme-dark-background-1);
 }
 
 .skip-link:focus {
@@ -323,10 +350,6 @@ nav .horizontal-list a {
 
 .horizontal-list li.selected a {
   text-decoration: none;
-}
-
-#sidebar-nav a {
-  color: var(--theme-light-text-a);
 }
 
 #sidebar-nav h1 {
@@ -495,14 +518,6 @@ tr {
 
 thead, tfoot, tr {
   border: 1px solid black;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: var(--theme-light-background-b);
-}
-
-thead, tbody tr:nth-child(even) {
-  background-color: var(--theme-light-background-a);
 }
 
 thead {
