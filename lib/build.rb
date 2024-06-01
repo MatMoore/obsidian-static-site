@@ -65,14 +65,7 @@ class Build
     # Remove pages without "public" in the frontmatter
     parser.index.prune!
 
-    # Copy media files
-    parser.media.each do |a|
-      file_path = output_dir + a.slug
-      file_path.parent.mkpath
-      next if a.is_index?
-
-      FileUtils.copy(a.source_path, file_path)
-    end
+    copy_media_pages
 
     # Generate all the pages
     parser.index.walk_tree do |page|
@@ -80,8 +73,28 @@ class Build
     end
   end
 
+  def copy_media_pages
+    parser.media.each do |a|
+      copy_media_page(a)
+    end
+  end
+
+  def copy_media_page(page)
+    file_path = output_dir + page.slug
+    file_path.parent.mkpath
+    return if page.is_index?
+
+    FileUtils.copy(page.source_path, file_path)
+  end
+
   def copy_assets
     FileUtils.cp_r('assets', output_dir + 'assets')
+  end
+
+  def copy_asset(filename)
+    asset_path = Pathname.new('assets').expand_path
+    from = Pathname.new(filename).relative_path_from(asset_path)
+    FileUtils.copy(filename, output_dir + 'assets' + from)
   end
 
   attr_reader :output_dir
