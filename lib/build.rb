@@ -1,3 +1,4 @@
+require 'filewatcher'
 require_relative "page_builder"
 
 class Build
@@ -15,6 +16,37 @@ class Build
   def clean
     output_dir.rmtree
     output_dir.mkpath
+  end
+
+  def build_and_write_page_by_slug(slug)
+    page = parser.index.find_in_tree(slug)
+    if page.nil?
+      raise "Page not found #{slug}"
+    end
+    build_and_write_page(page)
+  end
+
+  def build_and_write_page(page)
+    output = page_builder.build(page, page.parse)
+
+    file_path = output_dir + page.slug
+
+    # Map every page to a directory with an index, regardless of whether
+    # it has any children. This enables child pages to be added in the
+    # future without changing the parent URL.
+    # I.e. rather than foo/bar.html evolving into foo/bar and foo/bar/*
+    # we have foo/bar evolving into foo/bar and foo/bar/*
+    html_path = if page.is_index?
+      file_path + "index.html"
+    else
+      file_path.dirname + file_path.basename + "index.html"
+    end
+
+    html_path.dirname.mkpath
+
+    File.open(html_path, 'w') do |f|
+      f.write(output)
+    end
   end
 
   def generate_site
@@ -44,26 +76,7 @@ class Build
 
     # Generate all the pages
     parser.index.walk_tree do |page|
-      output = page_builder.build(page, page.parse)
-
-      file_path = output_dir + page.slug
-
-      # Map every page to a directory with an index, regardless of whether
-      # it has any children. This enables child pages to be added in the
-      # future without changing the parent URL.
-      # I.e. rather than foo/bar.html evolving into foo/bar and foo/bar/*
-      # we have foo/bar evolving into foo/bar and foo/bar/*
-      html_path = if page.is_index?
-        file_path + "index.html"
-      else
-        file_path.dirname + file_path.basename + "index.html"
-      end
-
-      html_path.dirname.mkpath
-
-      File.open(html_path, 'w') do |f|
-        f.write(output)
-      end
+      build_and_write_page(page)
     end
   end
 

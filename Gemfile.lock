@@ -16,6 +16,10 @@ GEM
     byebug (11.1.3)
     coderay (1.1.3)
     diff-lcs (1.5.0)
+    filewatcher (2.1.0)
+      module_methods (~> 0.1.0)
+    filewatcher-spinner (1.0.0)
+      filewatcher (~> 2.0)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     markly (0.7.0)
@@ -23,6 +27,7 @@ GEM
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
+    module_methods (0.1.0)
     nokogiri (1.16.4-x86_64-darwin)
       racc (~> 1.4)
     oga (3.4)
@@ -59,6 +64,8 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  filewatcher
+  filewatcher-spinner
   obsidian-parser!
   oga (~> 3.4)
   pry-byebug

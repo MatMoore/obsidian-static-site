@@ -5,6 +5,7 @@ require 'benchmark'
 require 'obsidian/parser'
 require_relative 'lib/build'
 require_relative 'lib/server'
+require_relative 'lib/watcher'
 
 output_dir = Pathname.new('output')
 parser = Obsidian::Parser.new(Pathname.new('/Users/mat/tech-notes'))
@@ -19,5 +20,6 @@ Benchmark.bm(20) do |x|
   x.report("Copy assets") { build.copy_assets }
 end
 
-# TODO: watch files and regenerate/refresh on change
-Server.serve(output_dir)
+Watcher.watch('/Users/mat/tech-notes', build) do
+  Server.serve(output_dir)
+end
