@@ -62,14 +62,6 @@ describe PageBuilder do
       expect(title).to eq("Knowledge base")
     end
 
-    it "prepends the 'Index:' prefix" do
-      page1 = root_page.add_page("foo")
-      page2 = page1.add_page("bar")
-
-      title = page_builder.get_title(page1)
-      expect(title).to eq("Index: foo")
-    end
-
     it "uses the page title for regular pages" do
       page = root_page.add_page("foo")
 

@@ -13,10 +13,10 @@ describe(Helpers) do
       navigation.add_page("foo/bar")
       navigation.add_page("foo/bar/baz")
 
-      result = helpers.render_nav(navigation.children[0], max_level: 2)
+      result = helpers.render_nav(navigation.children[0])
       document = Oga.parse_html(result)
 
-      expect(document).to contain_css('h1:root > a[href="/foo/"]')
+      expect(document).to contain_css('h2:root > a[href="/foo/"]')
       expect(document).to contain_css('ul.navigation-list:root > li > a[href="/foo/bar/"]')
       expect(document).not_to contain_css('a[href="/foo/bar/baz"]')
     end
@@ -41,17 +41,17 @@ describe(Helpers) do
     end
 
     it "includes child directories" do
-      expect(document).to contain_css('.index > h3 > a[href="/foo/"]')
-      expect(document).to contain_css('.index > h3 > a[href="/a/"]')
+      expect(document).to contain_css('.cards > .card > h3 > a[href="/foo/"]')
+      expect(document).to contain_css('.cards > .card > h3 > a[href="/a/"]')
     end
 
     it "includes grandchildren" do
-      expect(document).to contain_css('.index > ul > li > a[href="/a/b/"]')
+      expect(document).to contain_css('.cards > .card > ul > li > a[href="/a/b/"]')
     end
 
     it "includes child pages" do
-      expect(document).to contain_css('.index > ul > li > a[href="/d/"]')
-      expect(document).to contain_css('.index > ul > li > a[href="/e/"]')
+      expect(document).to contain_css('ul > li > a[href="/d/"]')
+      expect(document).to contain_css('ul > li > a[href="/e/"]')
     end
 
     it "excludes grand-grandchildren" do

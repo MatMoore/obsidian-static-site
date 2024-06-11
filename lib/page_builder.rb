@@ -27,8 +27,6 @@ class PageBuilder
   def get_title(page)
     if page.title == ""
       "Knowledge base"
-    elsif page.is_index?
-      "#{page.title} - index"
     else
       page.title
     end

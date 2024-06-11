@@ -7,8 +7,8 @@ class Helpers
     @breadcrumb_template = Tilt::ERBTemplate.new("templates/breadcrumb.html.erb")
   end
 
-  def render_nav(navigation_root, level: 1, max_level: 3)
-    @nav_template.render(self, page: navigation_root, level: level, max_level: max_level)
+  def render_nav(navigation_root)
+    @nav_template.render(self, page: navigation_root)
   end
 
   def render_index(children)
