@@ -7,10 +7,6 @@ class Build
   def initialize(output_dir, parser)
     @output_dir = output_dir
     @parser = parser
-    @page_builder = PageBuilder.new(
-      index: parser.index,
-      top_level_nav: top_level_nav
-    )
   end
 
   def clean
@@ -34,7 +30,7 @@ class Build
     copy_media_page(page)
   end
 
-  def build_and_write_page(page)
+  def build_and_write_page(page, page_builder)
     output = page_builder.build(page, page.value.parse(root: parser.index, media_root: parser.media_index))
 
     file_path = output_dir + page.value.slug
@@ -58,15 +54,13 @@ class Build
   end
 
   def generate_site
-    top_level_nav.each do |page|
-      page.mark_referenced
-    end
-
-    parser.index.walk_tree do |page|
-      parsed_page = page.parse
+    parser.index.tree.walk do |page|
+      parsed_page = page.value.parse(root: parser.index, media_root: parser.media_index)
       next if parsed_page.nil?
 
-      page.mark_referenced if parsed_page.frontmatter["public"]
+      if parsed_page.frontmatter["public"]
+        parser.index.mark_referenced(page.value.slug)
+      end
     end
 
     # Remove pages without "public" in the frontmatter
@@ -74,9 +68,14 @@ class Build
 
     copy_media_pages
 
+    page_builder = PageBuilder.new(
+      index: parser.index,
+      top_level_nav: parser.index.tree.children
+    )
+
     # Generate all the pages
-    parser.index.walk_tree do |page|
-      build_and_write_page(page)
+    parser.index.tree.walk do |page|
+      build_and_write_page(page, page_builder)
     end
   end
 
@@ -90,7 +89,7 @@ class Build
     file_path = output_dir + page.value.slug
     file_path.parent.mkpath
 
-    FileUtils.copy(page.source_path, file_path)
+    FileUtils.copy(page.value.source_path, file_path) unless page.value.source_path.nil?
   end
 
   def copy_assets
@@ -105,11 +104,4 @@ class Build
 
   attr_reader :output_dir
   attr_reader :parser
-  attr_reader :page_builder
-
-  private
-
-  def top_level_nav
-    parser.index.tree.children
-  end
 end

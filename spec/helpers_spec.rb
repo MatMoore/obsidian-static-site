@@ -9,7 +9,7 @@ describe(Helpers) do
 
   describe "#render_nav" do
     it "renders 2 levels" do
-      navigation = Obsidian::Page.create_root
+      navigation = Obsidian::Vault.create_root
       navigation.add_page("foo/bar")
       navigation.add_page("foo/bar/baz")
 
@@ -31,7 +31,7 @@ describe(Helpers) do
     let(:result) { helpers.render_index(children) }
     let(:document) { Oga.parse_html(result) }
     let(:children) do
-      index = Obsidian::Page.create_root
+      index = Obsidian::Vault.create_root
       index.add_page("foo/bar")
       index.add_page("a/b/c")
       index.add_page("d")
@@ -61,7 +61,7 @@ describe(Helpers) do
 
   describe '#render_breadcrumbs' do
     it 'renders all parts of the breadcrumb trail' do
-      index = Obsidian::Page.create_root
+      index = Obsidian::Vault.create_root
       baz = index.add_page("foo/bar/baz")
 
       result = helpers.render_breadcrumbs(baz)

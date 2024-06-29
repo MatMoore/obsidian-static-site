@@ -5,9 +5,9 @@ require_relative "../lib/page_builder"
 require "obsidian/parser"
 
 describe PageBuilder do
-  let(:root_page) { Obsidian::Page.create_root }
+  let(:root_page) { Obsidian::Vault.create_root }
   let(:parsed_page) { Obsidian::ParsedPage.new(html: 'foo') }
-  let(:page) { instance_double('Obsidian::PageNode', :page, parse: parsed_page, title: 'ABC', last_modified: nil, slug: 'foo/bar/baz') }
+  let(:page) { instance_double('Obsidian::Page', :page, parse: parsed_page, title: 'ABC', last_modified: nil, slug: 'foo/bar/baz') }
   let(:tree_node) { Obsidian::Tree.new(page) }
 
   subject(:page_builder) {
