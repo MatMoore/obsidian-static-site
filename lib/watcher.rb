@@ -30,12 +30,14 @@ class Watcher
   def rebuild(filename)
      if filename.to_s.start_with?(vault_path.to_s)
       filename = Pathname.new(filename).relative_path_from(vault_path)
+      puts filename.basename
 
+      ## TODO this is broken for index files - rewrite
       if filename.extname == "md"
         slug = filename.to_s.sub(/.md$/, "")
         builder.build_and_write_page_by_slug(slug)
       else
-        builder.copy_media_page(filename)
+        builder.copy_media_page_by_slug(filename)
       end
 
     elsif filename.to_s.start_with?(asset_path.to_s)

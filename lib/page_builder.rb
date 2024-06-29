@@ -11,11 +11,11 @@ class PageBuilder
   end
 
   def build(page, parsed_page)
-    output = template.render(
+    template.render(
       helpers,
       title: CGI.escape_html(get_title(page)),
       meta_description: CGI.escape_html(get_title(page)),
-      content: parsed_page&.to_html,
+      content: parsed_page&.html,
       top_level_nav: top_level_nav,
       navigation_root: get_navigation_root(page),
       page_section: get_section(page) || index.find_in_tree("Concepts"),
@@ -25,10 +25,10 @@ class PageBuilder
   end
 
   def get_title(page)
-    if page.title == ""
+    if page.value.title == ""
       "Knowledge base"
     else
-      page.title
+      page.value.title
     end
   end
 

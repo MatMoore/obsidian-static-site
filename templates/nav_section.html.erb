@@ -1,4 +1,4 @@
-<% unless page.nil? %>
+<% unless page.nil? || page.parent.nil? %>
   <% page.parent.children.each do |sibling| %>
   <%= header_tag(2) { link_page(sibling) } %>
   <% if sibling == page && page.is_index? %>

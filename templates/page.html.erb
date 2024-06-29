@@ -37,8 +37,8 @@
     <div class="centered-content">
     <%= render_breadcrumbs(page) %>
     <h1><%= title %></h1>
-    <% unless page.is_index? || page.last_modified.nil? %>
-    <time class="last-updated" datetime="<%= page.last_modified %>">Last updated <%= humanise_time(page.last_modified) %></time>
+    <% unless page.is_index? || page.value.last_modified.nil? %>
+    <time class="last-updated" datetime="<%= page.value.last_modified %>">Last updated <%= humanise_time(page.value.last_modified) %></time>
     <% end %>
     <% if content.nil? %>
     <%= render_index(children) %>

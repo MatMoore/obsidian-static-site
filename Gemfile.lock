@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/matmoore/obsidian-parser.git
-  revision: c8c5b9389de5a4e8e34829b02af99a3eb6434d7b
-  branch: main
+  revision: 1daf9a3fcc5a0b0d56371a5aea06bb02d795d565
+  branch: refactor-vault
   specs:
     obsidian-parser (0.7.0)
       marcel (~> 0.3.1)
@@ -28,7 +28,7 @@ GEM
       nokogiri (~> 1)
       rake
     module_methods (0.1.0)
-    nokogiri (1.16.4-x86_64-darwin)
+    nokogiri (1.16.6-x86_64-darwin)
       racc (~> 1.4)
     oga (3.4)
       ast
@@ -39,7 +39,7 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    racc (1.7.3)
+    racc (1.8.0)
     rake (13.2.1)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)

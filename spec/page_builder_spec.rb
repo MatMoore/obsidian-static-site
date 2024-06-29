@@ -6,16 +6,19 @@ require "obsidian/parser"
 
 describe PageBuilder do
   let(:root_page) { Obsidian::Page.create_root }
+  let(:parsed_page) { Obsidian::ParsedPage.new(html: 'foo') }
+  let(:page) { instance_double('Obsidian::PageNode', :page, parse: parsed_page, title: 'ABC', last_modified: nil, slug: 'foo/bar/baz') }
+  let(:tree_node) { Obsidian::Tree.new(page) }
 
   subject(:page_builder) {
     described_class.new(
       index: root_page,
-      top_level_nav: root_page.children
+      top_level_nav: root_page.tree.children
     )
   }
 
   subject(:result) do
-    page_builder.build(root_page, root_page.parse)
+    page_builder.build(tree_node, parsed_page)
   end
 
   let(:document) { Oga.parse_html(result) }
@@ -27,7 +30,7 @@ describe PageBuilder do
 
     context "when the page is an index with no content" do
       before do
-        root_page.add_page("foo")
+        tree_node.add_child("dummy", :dummy)
       end
 
       it "contains a generated index" do
@@ -36,22 +39,12 @@ describe PageBuilder do
     end
 
     context "when the page is an index with content" do
-      let(:page) { Obsidian::Page.new(title: "", slug: "", content: content) }
-      let(:content) { Proc.new { "hello world" } }
-
-      subject(:result) do
-        described_class.new(
-          index: page,
-          top_level_nav: page.children
-        ).build(page, page.parse)
-      end
-
       before do
-        page.add_page("foo")
+        tree_node.add_child("dummy", :dummy)
       end
 
       it "contains the index content" do
-        expect(document.at_css("#content").text).to include("hello world")
+        expect(document.at_css("#content").text).to include("ABC")
       end
     end
   end
@@ -77,25 +70,25 @@ describe PageBuilder do
 
       navigation = page_builder.get_navigation_root(root_page)
 
-      expect(navigation).to eq(concepts)
+      expect(navigation).to eq(concepts.tree)
     end
 
     it "uses the page for an index page" do
       page = root_page.add_page("foo")
       page.add_page("bar")
 
-      navigation = page_builder.get_navigation_root(page)
+      navigation = page_builder.get_navigation_root(page.tree)
 
-      expect(navigation).to eq(page)
+      expect(navigation).to eq(page.tree)
     end
 
     it "uses the parent for a non-index page" do
       page1 = root_page.add_page("foo")
       page2 = page1.add_page("bar")
 
-      navigation = page_builder.get_navigation_root(page2)
+      navigation = page_builder.get_navigation_root(page2.tree)
 
-      expect(navigation).to eq(page1)
+      expect(navigation).to eq(page1.tree)
     end
 
     describe "#get_section" do
@@ -103,9 +96,9 @@ describe PageBuilder do
         section = root_page.add_page("foo")
         page = section.add_page("bar/baz")
 
-        page_section = page_builder.get_section(page)
+        page_section = page_builder.get_section(page.tree)
 
-        expect(page_section).to eq(section)
+        expect(page_section).to eq(section.tree)
       end
     end
   end

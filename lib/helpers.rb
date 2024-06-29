@@ -43,12 +43,12 @@ class Helpers
   end
 
   def link_page(page)
-    href = "/#{page.slug}/"
+    href = "/#{page.value.slug}/"
 
     if page.parent.nil?
       link_tag("/", "Home")
     else
-      link_tag(href, page.title)
+      link_tag(href, page.value.title)
     end
   end
 

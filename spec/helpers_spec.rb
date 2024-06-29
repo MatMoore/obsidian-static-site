@@ -13,7 +13,7 @@ describe(Helpers) do
       navigation.add_page("foo/bar")
       navigation.add_page("foo/bar/baz")
 
-      result = helpers.render_nav(navigation.children[0])
+      result = helpers.render_nav(navigation.tree.children[0])
       document = Oga.parse_html(result)
 
       expect(document).to contain_css('h2:root > a[href="/foo/"]')
@@ -37,7 +37,7 @@ describe(Helpers) do
       index.add_page("d")
       index.add_page("e")
 
-      index.children
+      index.tree.children
     end
 
     it "includes child directories" do

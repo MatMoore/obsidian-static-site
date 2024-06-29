@@ -26,10 +26,18 @@ class Build
     build_and_write_page(page)
   end
 
-  def build_and_write_page(page)
-    output = page_builder.build(page, page.parse)
+  def copy_media_page_by_slug(slug)
+    page = parser.media_index.find_in_tree(slug)
+    if page.nil?
+      raise "Page not found #{slug}"
+    end
+    copy_media_page(page)
+  end
 
-    file_path = output_dir + page.slug
+  def build_and_write_page(page)
+    output = page_builder.build(page, page.value.parse(root: parser.index, media_root: parser.media_index))
+
+    file_path = output_dir + page.value.slug
 
     # Map every page to a directory with an index, regardless of whether
     # it has any children. This enables child pages to be added in the
@@ -55,11 +63,10 @@ class Build
     end
 
     parser.index.walk_tree do |page|
-      next if page.content.nil?
-
       parsed_page = page.parse
+      next if parsed_page.nil?
 
-      page.mark_referenced if parsed_page&.frontmatter["public"]
+      page.mark_referenced if parsed_page.frontmatter["public"]
     end
 
     # Remove pages without "public" in the frontmatter
@@ -80,9 +87,8 @@ class Build
   end
 
   def copy_media_page(page)
-    file_path = output_dir + page.slug
+    file_path = output_dir + page.value.slug
     file_path.parent.mkpath
-    return if page.is_index?
 
     FileUtils.copy(page.source_path, file_path)
   end
@@ -104,6 +110,6 @@ class Build
   private
 
   def top_level_nav
-     parser.index.children.filter {|d| ['Howto', 'Concepts', 'Technologies'].include?(d.title) }
+    parser.index.tree.children
   end
 end
