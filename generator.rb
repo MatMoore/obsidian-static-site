@@ -8,7 +8,7 @@ require_relative 'lib/server'
 require_relative 'lib/watcher'
 
 output_dir = Pathname.new('output')
-parser = Obsidian::Parser.new(Pathname.new('/Users/mat/tech-notes'))
+parser = Obsidian::Parser.new(Pathname.new('/Users/mat/Dropbox/tech-notes'))
 build = Build.new(output_dir, parser)
 
 puts "Generating..."
@@ -20,6 +20,6 @@ Benchmark.bm(20) do |x|
   x.report("Copy assets") { build.copy_assets }
 end
 
-Watcher.watch('/Users/mat/tech-notes', build) do
+Watcher.watch('/Users/mat/Dropbox/tech-notes', build) do
   Server.serve(output_dir)
 end

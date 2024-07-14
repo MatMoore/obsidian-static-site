@@ -5,7 +5,7 @@
     <% directories.each do |child| %>
       <div class="card">
       <h3><%= link_page(child) %></h3>
-      <ul>
+      <ul class="comma-seperated-list <% if child.children.size > 3 %> comma-seperated-list-truncated<% end %>">
       <% child.children.slice(0,3).each do |grandchild| %>
       <li><%= link_page(grandchild) %></li>
       <% end %>

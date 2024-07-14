@@ -442,6 +442,34 @@ nav .horizontal-list a {
   display: none;
 }
 
+.card {
+  text-align: center;
+}
+
+.card :last-child {
+  margin-top: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.comma-seperated-list {
+  list-style-type: none;
+  font-size: var(--font-size-smallish);
+  padding-left: var(--spacing-1);
+  padding-right: var(--spacing-1);
+}
+
+.comma-seperated-list li {
+  display: inline;
+}
+
+.comma-seperated-list li:not(:last-child)::after{
+  content: ",";
+}
+
+.comma-seperated-list-truncated li:last-child::after{
+  content: "…";
+}
+
 /* Prism syntax highlighting tokens */
 .token.comment,
 .token.prolog,
