@@ -56,21 +56,22 @@ class Helpers
     "<a href=\"#{href}\">#{link_text}</a>"
   end
 
+  def ordinalise(number)
+    ordinal = case number % 10
+      when 1
+        number == 11 ? 'th' : 'st'
+      when 2
+        number == 12 ? 'th' : 'nd'
+      when 3
+        number == 13 ? 'th' : 'rd'
+      else
+        'th'
+      end
+    "#{number}#{ordinal}"
+  end
+
   def humanise_time(time)
-    seconds_elapsed = time - Time.now
-    days_elapsed = (seconds_elapsed / (60 * 60 * 24))
-    if days_elapsed > 365
-      years_elapsed = (days_elapsed / 365)
-      "about #{years_elapsed.round} months ago"
-    elsif days_elapsed > 30
-      months_elapsed = (days_elapsed / 30)
-      "about #{months_elapsed.round} months ago"
-    elsif days_elapsed > 2
-      "#{days_elapsed.round} days ago"
-    elsif days_elapsed > 1
-      "yesterday"
-    else
-      "today"
-    end
+    day_with_ordinal = ordinalise(time.day)
+    time.strftime("#{day_with_ordinal} %B, %-Y")
   end
 end

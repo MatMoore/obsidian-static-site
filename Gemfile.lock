@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/matmoore/obsidian-parser.git
-  revision: 39fe320594361c2628a7dccf9cf0d276b975a857
-  branch: refactor-vault
+  revision: 61d63fe6ffcf1b6ba41a98915aa19578a6b796aa
+  branch: main
   specs:
     obsidian-parser (0.7.0)
       marcel (~> 0.3.1)
@@ -61,12 +61,7 @@ GEM
     webrick (1.8.1)
 
 PLATFORMS
-  aarch64-linux
-  arm-linux
-  arm64-darwin
-  x86-linux
   x86_64-darwin
-  x86_64-linux
 
 DEPENDENCIES
   filewatcher
