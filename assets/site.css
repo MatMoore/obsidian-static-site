@@ -190,7 +190,7 @@ pre,
 code {
   background: var(--palette-b);
   color: var(--black);
-  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
 }
 
 pre>code {
