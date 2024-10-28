@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/matmoore/obsidian-parser.git
-  revision: 61d63fe6ffcf1b6ba41a98915aa19578a6b796aa
+  revision: 804350a94e5b01a03cda3620e15452f6420021e7
   branch: main
   specs:
     obsidian-parser (0.7.0)

@@ -66,6 +66,9 @@ class Build
     # Remove pages without "public" in the frontmatter
     parser.index.prune!
 
+    # Collapse subdirectories with only one page
+    parser.index.collapse!
+
     copy_media_pages
 
     page_builder = PageBuilder.new(
