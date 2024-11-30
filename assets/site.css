@@ -554,7 +554,7 @@ td {
   padding-block: var(--spacing-1);
   border-left: solid black 1px;
   }
-  
+
   td,
   th[scope="row"] {
     border-top: solid black 1px;
@@ -598,4 +598,47 @@ h1 + .last-updated {
   grid-template-rows: max-content 1fr;
   margin-bottom: 0;
   padding: var(--spacing-4);
+}
+
+ul li {
+  margin-bottom: var(--spacing-2);
+}
+
+ul ul {
+  margin-top: var(--spacing-2);
+}
+
+ul ul li {
+  list-style-type: disc;
+}
+
+*:focus {
+  outline: 4px solid rgb(255, 174, 0);
+  z-index: 1000;
+  position: relative;
+}
+
+.searchform {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 30rem;
+  margin-left: var(--spacing-6);
+  margin-right: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+.searchform input[type="search"] {
+  flex-basis: 2;
+    flex-grow: 1;
+  font-size: var(--font-size-medium);
+  border: 2px solid var(--platinum);
+  height: 2em;
+}
+
+.searchform button {
+  flex-basis: 1;
+  font-size: var(--font-size-medium);
+  border-left: 0;
+  border: 2px solid var(--platinum);
+  height: 2em;
+  background-color: var(--blue);
 }

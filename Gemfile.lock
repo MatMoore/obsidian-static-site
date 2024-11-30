@@ -20,6 +20,7 @@ GEM
       module_methods (~> 0.1.0)
     filewatcher-spinner (1.0.0)
       filewatcher (~> 2.0)
+    libv8-node (18.19.0.0-x86_64-darwin)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     markly (0.7.0)
@@ -27,6 +28,8 @@ GEM
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
+    mini_racer (0.16.0)
+      libv8-node (~> 18.19.0.0)
     module_methods (0.1.0)
     nokogiri (1.16.6-x86_64-darwin)
       racc (~> 1.4)
@@ -66,6 +69,7 @@ PLATFORMS
 DEPENDENCIES
   filewatcher
   filewatcher-spinner
+  mini_racer
   obsidian-parser!
   oga (~> 3.4)
   pry-byebug

@@ -21,6 +21,7 @@
   </script>
   <script src="assets/prism.js" defer></script>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js" defer></script>
+  <script src="assets/lunr.js" defer></script>
  </head>
  <body class="full-height-with-header">
  <header>
@@ -33,6 +34,10 @@
       <li><a href="">A short title</a></li>
     </ul>
   </nav>
+  <form class="searchform">
+    <input type="search"><button>Search</button>
+  </form>
+
  </header>
  <div class="optional-sidebar-layout">
   <article>
@@ -122,6 +127,16 @@ output = ERB.new(template).result_with_hash(
     </table>
     <h3>this is a H3</h3>
     <p>Some text</p>
+    <ul>
+      <li>abc</li>
+      <li>
+        bla bla
+        <ul>
+          <li>def</li>
+          <li>ghi</li>
+        </ul>
+      </li>
+    </ul>
   </div>
   </article>
   <nav id="sidebar-nav">
