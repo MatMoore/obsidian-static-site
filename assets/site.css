@@ -37,25 +37,25 @@
 }
 
 html {
-  --oxford-blue: hsla(215, 61%, 16%, 1);
   --blue: hsla(174, 30%, 80%, 1);
   --platinum: hsla(174, 11%, 85%, 1);
   --platinum-light: hsla(174, 11%, 90%, 1);
-  --khaki: hsla(29, 17%, 75%, 1);
+  --yellow: hsla(40, 80%, 80%, 1);
   --white: hsla(0, 0%, 100%, 1);
   --black: #2a2a2a;
   --dark-grey: #3a3a3a;
   --dark-blue: hsla(230, 100%, 40%, 1);
+  --dark-blue-2: hsla(230, 66%, 34%, 1);
 
-  --palette-a: var(--oxford-blue);
   --palette-b: var(--platinum);
   --palette-c: var(--blue);
-  --palette-d: var(--khaki);
+  --palette-d: var(--yellow);
   --palette-a-text: var(--platinum);
   --palette-b-text: var(--black);
   --palette-b-secondary-text: var(--dark-grey);
   --palette-c-text: var(--black);
   --palette-c-secondary-text: var(--dark-grey);
+  --palette-a: var(--dark-blue-2);
   --palette-d-text: var(--black);
   --palette-d-secondary-text: var(--dark-grey);
   --theme-link: var(--dark-blue);
@@ -83,13 +83,14 @@ html {
   --spacing-5: 1.25rem;
   --spacing-6: 1.5rem;
 
-  --border-radius-1: 0.3em;
+  --border-radius-1: 10px;
+    --border-radius-2: 20px;
 
   /*
     Vertical spacings that are aligned with the body line height
   */
   --vertical-space-one-quarter: calc(var(--font-size-medium) * var(--standard-line-height) * 0.25);
-    --vertical-space-one-half: calc(var(--font-size-medium) * var(--standard-line-height) * 0.5);
+  --vertical-space-one-half: calc(var(--font-size-medium) * var(--standard-line-height) * 0.5);
   --vertical-space-1: calc(var(--font-size-medium) * var(--standard-line-height) * 1);
   --vertical-space-2: calc(var(--font-size-medium) * var(--standard-line-height) * 2);
   --vertical-space-3: calc(var(--font-size-medium) * var(--standard-line-height) * 3);
@@ -115,6 +116,9 @@ header,
   color: var(--palette-b-text);
 }
 
+#content {
+  border-radius: 0 var(--border-radius-2) 0 0;
+}
 h1 + .last-updated {
   color: var(--palette-b-secondary-text);
 }
@@ -125,7 +129,6 @@ article a {
 
 .skip-link {
   color: var(--platinum);
-  background-color: var(--oxford-blue);
 }
 
 header nav a {
@@ -134,6 +137,7 @@ header nav a {
 
 #sidebar-nav a {
   color: var(--palette-a-text);
+  background-color: var(--dark-blue-2);
 }
 
 tbody tr:nth-child(odd) {
@@ -157,6 +161,7 @@ body {
   line-height: var(--standard-line-height);
   padding: 0;
   margin: 0;
+  background-color: var(--dark-blue-2);
 }
 
 code {
@@ -286,10 +291,23 @@ Usage:
 header {
   padding: 0;
   font-size: var(--font-size-smallish);
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--spacing-6);
+  align-items:baseline;
 }
 
 header .horizontal-list {
   margin: var(--spacing-4);
+}
+
+header .section-nav {
+  flex-grow: 2;
+}
+
+header .searchform {
+  flex-grow: 1;
+  padding-right: var(--spacing-4);
 }
 
 nav {
@@ -621,21 +639,16 @@ ul ul li {
 .searchform {
   display: flex;
   justify-content: flex-start;
-  max-width: 30rem;
-  margin-left: var(--spacing-6);
-  margin-right: var(--spacing-4);
-  margin-bottom: var(--spacing-4);
 }
 .searchform input[type="search"] {
-  flex-basis: 2;
-    flex-grow: 1;
+  max-width: 20em;
+  flex-grow: 1;
   font-size: var(--font-size-medium);
   border: 2px solid var(--platinum);
   height: 2em;
 }
 
 .searchform button {
-  flex-basis: 1;
   font-size: var(--font-size-medium);
   border-left: 0;
   border: 2px solid var(--platinum);
