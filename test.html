@@ -22,6 +22,12 @@
   <script src="assets/prism.js" defer></script>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js" defer></script>
   <script src="assets/lunr.js" defer></script>
+  <script src="assets/search.js" defer></script>
+  <script>
+    window.addEventListener("load", (event) => {
+      initSearch();
+    });
+  </script>
  </head>
  <body class="full-height-with-header">
  <header>
@@ -29,17 +35,21 @@
   <nav id="section-nav">
     <ul class="horizontal-list">
       <li class="selected"><a href="">A really long title for a thing</a></li>
-      <li><a href="">A short title</a></li>
-      <li><a href="">A short title</a></li>
-      <li><a href="">A short title</a></li>
     </ul>
   </nav>
-  <form class="searchform">
+  <form id="search-form" class="searchform">
     <input type="search"><button>Search</button>
   </form>
 
  </header>
  <div class="optional-sidebar-layout">
+  <article id="search-panel">
+    <div class="centered-content">
+      <nav><a href="#" data-action="hide-search">Back</a></nav>
+      <h2 id="search-results-title">0 search results</h2>
+      <div id="search-results"></div>
+    </div>
+  </article>
   <article id="content">
     <div class="cards">
       <div class="card">
@@ -154,5 +164,11 @@ output = ERB.new(template).result_with_hash(
   </nav>
 
  </div>
+<template id="searchResult">
+  <div class="search-result">
+    <h3><a class="search-result-link"></a></h3>
+    <p class="search-result-fragment"></p>
+  </div>
+</template>
  </body>
 </html>

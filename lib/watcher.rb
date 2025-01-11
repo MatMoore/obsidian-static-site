@@ -10,10 +10,10 @@ class Watcher
   end
 
   def initialize(vault_path, builder)
-    # TODO: add a watch on assets
     puts "Watching for changes..."
-    @asset_path = Pathname.new(__dir__).parent + "assets"
-    @filewatcher = Filewatcher.new([vault_path.to_s, @asset_path], spinner: true)
+    code_path = Pathname.new(__dir__).parent
+    @asset_path = code_path + "assets"
+    @filewatcher = Filewatcher.new([vault_path.to_s, code_path.to_s], spinner: true)
     @builder = builder
     @vault_path = vault_path
     @thread = Thread.new(@filewatcher) do |fw|

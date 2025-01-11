@@ -655,3 +655,7 @@ ul ul li {
   height: 2em;
   background-color: var(--blue);
 }
+
+#search-form, #search-panel {
+  display: none;
+}

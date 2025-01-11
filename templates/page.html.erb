@@ -27,11 +27,12 @@
   <a class="skip-link" href='#content'>Skip to content</a>
   <nav id="section-nav" aria-label="Sections">
     <ul class="horizontal-list">
-      <% top_level_nav.each_with_index do |section, i| %>
-      <li <%= (page_section == section) ? "class=\"selected\"" : "" %>><%= link_page(section) %></li>
-      <% end %>
+      <li><a href="/">Mat's second brain</a></li>
     </ul>
   </nav>
+    <form class="searchform">
+    <input type="search"><button>Search</button>
+  </form>
  </header>
  <div class="optional-sidebar-layout optional-sidebar-layout-full-height">
   <article id="content">

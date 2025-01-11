@@ -30,8 +30,8 @@ class Build
     copy_media_page(page)
   end
 
-  def build_and_write_page(page, page_builder)
-    output = page_builder.build(page, page.value.parse(root: parser.index, media_root: parser.media_index))
+  def build_and_write_page(page, parsed_page, page_builder)
+    output = page_builder.build(page, parsed_page)
 
     file_path = output_dir + page.value.slug
 
@@ -76,10 +76,17 @@ class Build
       top_level_nav: parser.index.tree.children
     )
 
+    search_index_generator = SearchIndexGenerator.new
+
     # Generate all the pages
     parser.index.tree.walk do |page|
-      build_and_write_page(page, page_builder)
+      parsed_page = page.value.parse(root: parser.index, media_root: parser.media_index)
+      build_and_write_page(page, parsed_page, page_builder)
+
+      search_index_generator.add_doc(page, parsed_page)
     end
+
+    write_search_index(search_index_generator.generate)
   end
 
   def copy_media_pages
@@ -103,6 +110,13 @@ class Build
     asset_path = Pathname.new('assets').expand_path
     from = Pathname.new(filename).relative_path_from(asset_path)
     FileUtils.copy(filename, output_dir + 'assets' + from)
+  end
+
+  def write_search_index(index)
+    filename = output_dir + "search-index.json"
+    File.open(filename, 'w') do |f|
+      f.write(index.to_json)
+    end
   end
 
   attr_reader :output_dir
