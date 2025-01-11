@@ -1,5 +1,6 @@
 require 'filewatcher'
 require_relative "page_builder"
+require_relative "search_index_generator"
 
 class Build
   SECTIONS = ['Howto', 'Concepts', 'Technologies']
@@ -83,7 +84,7 @@ class Build
       parsed_page = page.value.parse(root: parser.index, media_root: parser.media_index)
       build_and_write_page(page, parsed_page, page_builder)
 
-      search_index_generator.add_doc(page, parsed_page)
+      search_index_generator.add_doc(page.value, parsed_page)
     end
 
     write_search_index(search_index_generator.generate)
