@@ -8,10 +8,11 @@ function initSearch() {
       reset();
     }
 
-    index = lunr.Index.load(response.json())
-    console.log("Loaded search index");
-
-    showFlex(searchForm);
+    response.json().then(indexJson => {
+      index = lunr.Index.load(indexJson)
+      console.log("Loaded search index");
+      showFlex(searchForm);
+    })
   });
 
   const content = document.getElementById("content");
@@ -48,4 +49,3 @@ function showFlex(elem) {
 function hide(elem) {
   elem.style.display = "none";
 }
-
